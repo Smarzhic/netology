@@ -4,7 +4,7 @@
 
 Домашнее задание к занятию «1.1. Введение в DevOps»
 
-(![Screenshot](https://github.com/Smarzhic/netology/blob/main/img/1.JPG)
+(![Screenshot](https://github.com/Smarzhic/netology/blob/main/01-intro-01/img/1.JPG)
 
 (![Screenshot](https://github.com/Smarzhic/netology/blob/main/img/2.JPG)
 
