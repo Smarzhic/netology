@@ -13,3 +13,5 @@
 (![Screenshot](https://github.com/Smarzhic/netology/blob/main/01-intro-01/img/4.JPG)
 
 (![Screenshot](https://github.com/Smarzhic/netology/blob/main/01-intro-01/img/5.JPG)
+
+(![Screenshot](https://github.com/Smarzhic/netology/blob/main/01-intro-01/img/6.JPG)
