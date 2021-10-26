@@ -4,7 +4,7 @@
 2. .tfvars
 3. .terraformrc
 
-Так же не будут игнорироваться следующие файлы
+Так же будут игнорироваться следующие файлы
 1. 1.crash.log
 2. override.tf
 3. override.tf.json
