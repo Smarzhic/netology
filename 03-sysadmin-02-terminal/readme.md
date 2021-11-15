@@ -67,17 +67,17 @@
 12. При открытии нового окна терминала и vagrant ssh создается новая сессия и выделяется pty. Это можно подтвердить командой tty, которая упоминалась в лекции 3.2
 > при подключении ожидается пользователь, а не другой процесс, отсутствует локальный tty в данный момент. Для запуска можно добавить -t - , и команда выполнится c принудительным созданием псевдотерминала
 13. Бывает, что есть необходимость переместить запущенный процесс из одной сессии в другую. Попробуйте сделать это, воспользовавшись reptyr
-> Порядок переноса процесса в другую сессию:
-> Start a long running process, e.g. top
-> Background the process with CTRL-Z
-> Resume the process in the background: bg
-> Display your running background jobs with jobs -l, this should look like this:
-> [1]+ 4711 Stopped (signal) top
-> (The -l in jobs -l makes sure you'll get the PID)
-> Disown the jobs from the current parent with disown top. After that, jobs will not show the job any more, but ps -a will.
-> Start your terminal multiplexer of choice, e.g. tmux
-> Reattach to the backgrounded process: reptyr 4711
-> Detach your terminal multiplexer (e.g. CTRL-A D) and close ssh
-> Reconnect ssh, attach to your multiplexer (e.g. tmux attach), rejoice!
+> Порядок переноса процесса в другую сессию:  
+> Start a long running process, e.g. top  
+> Background the process with CTRL-Z  
+> Resume the process in the background: bg  
+> Display your running background jobs with jobs -l, this should look like this:  
+> [1]+ 4711 Stopped (signal) top  
+> (The -l in jobs -l makes sure you'll get the PID)  
+> Disown the jobs from the current parent with disown top. After that, jobs will not show the job any more, but ps -a will.  
+> Start your terminal multiplexer of choice, e.g. tmux  
+> Reattach to the backgrounded process: reptyr 4711  
+> Detach your terminal multiplexer (e.g. CTRL-A D) and close ssh  
+> Reconnect ssh, attach to your multiplexer (e.g. tmux attach), rejoice!  
 14. sudo echo string > /root/new_file не даст выполнить перенаправление под обычным пользователем, так как перенаправлением занимается процесс shell'а, который запущен без sudo под вашим пользователем. Для решения данной проблемы можно использовать конструкцию echo string | sudo tee /root/new_file. Узнайте что делает команда tee и почему в отличие от sudo echo команда с sudo tee будет работать.
 > команда tee делает вывод одновременно и в файл, указаный в качестве параметра, и в stdout, в данном примере команда получает вывод из stdin, перенаправленный через pipe от stdout команды echo и так как команда запущена от sudo , соотвественно имеет права на запись в файл.
