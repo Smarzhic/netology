@@ -69,5 +69,6 @@
 13. Бывает, что есть необходимость переместить запущенный процесс из одной сессии в другую. Попробуйте сделать это, воспользовавшись reptyr
 >![top1](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-02-terminal/2.JPG)
 >![top2](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-02-terminal/3.JPG)
+>![top3](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-02-terminal/4.JPG)
 14. sudo echo string > /root/new_file не даст выполнить перенаправление под обычным пользователем, так как перенаправлением занимается процесс shell'а, который запущен без sudo под вашим пользователем. Для решения данной проблемы можно использовать конструкцию echo string | sudo tee /root/new_file. Узнайте что делает команда tee и почему в отличие от sudo echo команда с sudo tee будет работать.
 > команда tee делает вывод одновременно и в файл, указаный в качестве параметра, и в stdout, в данном примере команда получает вывод из stdin, перенаправленный через pipe от stdout команды echo и так как команда запущена от sudo , соотвественно имеет права на запись в файл.
