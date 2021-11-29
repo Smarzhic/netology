@@ -1,5 +1,5 @@
 # Домашнее задание "3.6. Компьютерные сети, лекция 1"
-1.Работа c HTTP через телнет.
+1. Работа c HTTP через телнет.
 ```
 HTTP/1.1 301 Moved Permanently
 cache-control: no-cache, no-store, must-revalidate
@@ -27,3 +27,7 @@ Status Code: 200
 Remote Address: 151.101.65.69:443
 Referrer Policy: no-referrer-when-downgrade
 ```
+>![PID 1](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-06-net/2.JPG)
+3. Какой IP адрес у вас в интернете?
+217.107.125.105
+4. 
