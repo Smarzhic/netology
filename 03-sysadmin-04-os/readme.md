@@ -36,7 +36,9 @@ Type=simple
 ExecStart=/usr/local/bin/node_exporter  $ONE $TWO $THREE
 EnvironmentFile=-/etc/default/cron
 [Install]
-WantedBy=multi-user.target
+WantedBy=multi-user.target  
+
+
 В ExecStart передана переменные $ONE $TWO $THREE. 
 ```
 2. Ознакомьтесь с опциями node_exporter и выводом /metrics по-умолчанию. Приведите несколько опций, которые вы бы выбрали для базового мониторинга хоста по CPU, памяти, диску и сети.
