@@ -50,4 +50,4 @@ remarks:        * data has been removed from this object.
 remarks:        * To view the original object, please query the RIPE Database at:
 remarks:        * http://www.ripe.net/whois
 ```
-
+5. Через какие сети проходит пакет, отправленный с вашего компьютера на адрес 8.8.8.8? Через какие AS? Воспользуйтесь утилитой traceroute
