@@ -51,31 +51,32 @@ remarks:        * To view the original object, please query the RIPE Database at
 remarks:        * http://www.ripe.net/whois
 ```
 5. Через какие сети проходит пакет, отправленный с вашего компьютера на адрес 8.8.8.8? Через какие AS? Воспользуйтесь утилитой traceroute
-> В системе Ubuntu 20.04  не смог найти аналогов ключей -An
 ```
-smarzhic@matrosov:~$ traceroute --help
-Usage: traceroute [OPTION...] HOST
-Print the route packets trace to network host.
-
-  -f, --first-hop=NUM        set initial hop distance, i.e., time-to-live
-  -g, --gateways=GATES       list of gateways for loose source routing
-  -I, --icmp                 use ICMP ECHO as probe
-  -m, --max-hop=NUM          set maximal hop count (default: 64)
-  -M, --type=METHOD          use METHOD (`icmp' or `udp') for traceroute
-                             operations, defaulting to `udp'
-  -p, --port=PORT            use destination PORT port (default: 33434)
-  -q, --tries=NUM            send NUM probe packets per hop (default: 3)
-      --resolve-hostnames    resolve hostnames
-  -t, --tos=NUM              set type of service (TOS) to NUM
-  -w, --wait=NUM             wait NUM seconds for response (default: 3)
-  -?, --help                 give this help list
-      --usage                give a short usage message
-  -V, --version              print program version
-
-Mandatory or optional arguments to long options are also mandatory or optional
-for any corresponding short options.
-
-Report bugs to <bug-inetutils@gnu.org>.
+vagrant@vagrant:~$ traceroute -AnI 8.8.8.8
+traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets
+ 1  10.0.2.2 [*]  0.150 ms  0.092 ms  0.077 ms
+ 2  192.168.1.1 [*]  1.940 ms  1.925 ms  1.910 ms
+ 3  100.64.0.205 [*]  8.424 ms  8.409 ms  9.711 ms
+ 4  100.64.0.204 [*]  8.009 ms  8.151 ms  8.201 ms
+ 5  188.254.26.74 [AS12389]  9.631 ms  9.754 ms  9.729 ms
+ 6  188.254.26.75 [AS12389]  9.749 ms  9.237 ms  9.349 ms
+ 7  * * *
+ 8  72.14.205.132 [AS15169]  11.259 ms  11.462 ms  12.245 ms
+ 9  108.170.250.129 [AS15169]  12.213 ms  12.180 ms  12.169 ms
+10  108.170.250.130 [AS15169]  12.144 ms  12.123 ms  12.111 ms
+11  209.85.255.136 [AS15169]  28.303 ms  28.380 ms  28.498 ms
+12  108.170.235.64 [AS15169]  28.469 ms  27.587 ms  28.075 ms
+13  172.253.79.169 [AS15169]  26.881 ms  26.595 ms  26.576 ms
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+19  * * *
+20  * * *
+21  * * *
+22  * * *
+23  8.8.8.8 [AS15169]  26.832 ms  26.966 ms  24.093 ms
 ```
 ```
 smarzhic@matrosov:~$ traceroute  8.8.8.8
