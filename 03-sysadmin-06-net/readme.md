@@ -29,5 +29,25 @@ Referrer Policy: no-referrer-when-downgrade
 ```
 >![PID 1](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-06-net/2.JPG)
 3. Какой IP адрес у вас в интернете?
+```
 217.107.125.105
-4. 
+```
+4. Какому провайдеру принадлежит ваш IP адрес? Какой автономной системе AS? Воспользуйтесь утилитой whois  
+``
+Провайдер - Ростелеком
+smarzhic@matrosov:~$ whois -h whois.radb.net 217.107.125.105
+route:          217.107.125.0/24
+descr:          ROSTELECOM NETS
+origin:         AS12389
+mnt-by:         ROSTELECOM-MNT
+created:        2017-04-18T07:39:30Z
+last-modified:  2017-04-18T07:39:30Z
+source:         RIPE
+remarks:        ****************************
+remarks:        * THIS OBJECT IS MODIFIED
+remarks:        * Please note that all data that is generally regarded as personal
+remarks:        * data has been removed from this object.
+remarks:        * To view the original object, please query the RIPE Database at:
+remarks:        * http://www.ripe.net/whois
+```
+
