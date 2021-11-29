@@ -102,3 +102,19 @@ traceroute to 8.8.8.8 (8.8.8.8), 64 hops max
  20   *  *  * 
  21   8.8.8.8  27,025ms  26,904ms  27,008ms 
  ```
+6. Повторите задание 5 в утилите mtr. На каком участке наибольшая задержка - delay?
+> Самая большая задержка на узле 108.170.235.64
+>![PID 1](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-06-net/mtr.JPG)
+7. Какие DNS сервера отвечают за доменное имя dns.google? Какие A записи? воспользуйтесь утилитой dig
+```
+dig +trace @8.8.8.8 dns.google
+dns.google.		900	IN	A	8.8.8.8
+dns.google.		900	IN	A	8.8.4.4
+```
+8. Проверьте PTR записи для IP адресов из задания 7. Какое доменное имя привязано к IP? воспользуйтесь утилитой dig
+```
+;; ANSWER SECTION:
+8.8.8.8.in-addr.arpa.	5684	IN	PTR	dns.google.
+;; ANSWER SECTION:
+4.4.8.8.in-addr.arpa.	86400	IN	PTR	dns.google.
+```
