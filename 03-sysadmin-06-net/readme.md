@@ -33,7 +33,7 @@ Referrer Policy: no-referrer-when-downgrade
 217.107.125.105
 ```
 4. Какому провайдеру принадлежит ваш IP адрес? Какой автономной системе AS? Воспользуйтесь утилитой whois  
-``
+```
 Провайдер - Ростелеком
 smarzhic@matrosov:~$ whois -h whois.radb.net 217.107.125.105
 route:          217.107.125.0/24
