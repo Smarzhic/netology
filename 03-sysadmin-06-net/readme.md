@@ -51,3 +51,54 @@ remarks:        * To view the original object, please query the RIPE Database at
 remarks:        * http://www.ripe.net/whois
 ```
 5. Через какие сети проходит пакет, отправленный с вашего компьютера на адрес 8.8.8.8? Через какие AS? Воспользуйтесь утилитой traceroute
+> В системе Ubuntu 20.04  не смог найти аналогов ключей -An
+```
+smarzhic@matrosov:~$ traceroute --help
+Usage: traceroute [OPTION...] HOST
+Print the route packets trace to network host.
+
+  -f, --first-hop=NUM        set initial hop distance, i.e., time-to-live
+  -g, --gateways=GATES       list of gateways for loose source routing
+  -I, --icmp                 use ICMP ECHO as probe
+  -m, --max-hop=NUM          set maximal hop count (default: 64)
+  -M, --type=METHOD          use METHOD (`icmp' or `udp') for traceroute
+                             operations, defaulting to `udp'
+  -p, --port=PORT            use destination PORT port (default: 33434)
+  -q, --tries=NUM            send NUM probe packets per hop (default: 3)
+      --resolve-hostnames    resolve hostnames
+  -t, --tos=NUM              set type of service (TOS) to NUM
+  -w, --wait=NUM             wait NUM seconds for response (default: 3)
+  -?, --help                 give this help list
+      --usage                give a short usage message
+  -V, --version              print program version
+
+Mandatory or optional arguments to long options are also mandatory or optional
+for any corresponding short options.
+
+Report bugs to <bug-inetutils@gnu.org>.
+```
+```
+smarzhic@matrosov:~$ traceroute  8.8.8.8
+traceroute to 8.8.8.8 (8.8.8.8), 64 hops max
+  1   192.168.1.1  0,693ms  0,316ms  0,283ms 
+  2   100.64.0.205  5,005ms  9,449ms  5,348ms 
+  3   100.64.0.204  9,591ms  7,529ms  7,359ms 
+  4   188.254.26.74  8,535ms  8,505ms  8,558ms 
+  5   188.254.26.75  8,711ms  8,759ms  8,873ms 
+  6   87.226.183.89  9,984ms  9,938ms  9,966ms 
+  7   5.143.253.105  9,848ms  9,634ms  9,752ms 
+  8   *  108.170.250.51  9,952ms  10,152ms 
+  9   142.250.239.64  24,516ms  22,068ms  24,943ms 
+ 10   216.239.43.20  25,383ms  25,387ms  25,114ms 
+ 11   142.250.236.77  22,172ms  21,947ms  22,106ms 
+ 12   *  *  * 
+ 13   *  *  * 
+ 14   *  *  * 
+ 15   *  *  * 
+ 16   *  *  * 
+ 17   *  *  * 
+ 18   *  *  * 
+ 19   *  *  * 
+ 20   *  *  * 
+ 21   8.8.8.8  27,025ms  26,904ms  27,008ms 
+ ```
