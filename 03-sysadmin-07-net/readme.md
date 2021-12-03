@@ -100,7 +100,7 @@ modprobe bonding
 ```
 Из подсети: 100.64.0.0 — 100.127.255.255 (маска подсети: 255.192.0.0 или /10) Carrier-Grade NAT.
 
-smarzhic@school:~$ ipcalc -b --split 40 100.64.0.0/10
+smarzhic@school:~$ ipcalc -bs 40 100.64.0.0/10
 Address:   100.64.0.0
 Netmask:   255.192.0.0 = 10
 Wildcard:  0.63.255.255
