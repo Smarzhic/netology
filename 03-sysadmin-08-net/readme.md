@@ -101,5 +101,5 @@ UNCONN       0            0                            [::]:sunrpc              
 vagrant@vagrant:~$
 ```
 5. Используя diagrams.net, создайте L3 диаграмму вашей домашней сети или любой другой сети, с которой вы работали.
-
+>![Net](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-08-net/Home_Net.png)
 
