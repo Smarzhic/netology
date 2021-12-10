@@ -141,3 +141,12 @@ Your Hardware Enablement Stack (HWE) is supported until April 2025.
 Last login: Fri Dec 10 22:56:23 2021 from 192.168.1.69
 smarzhic@matrosov:~$
 ```
+7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
+```
+smarzhic@netology:~$ sudo tcpdump -c 10 -w icmp.pcap
+tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 bytes
+10 packets captured
+11 packets received by filter
+0 packets dropped by kernel
+smarzhic@netology:~$
+```
