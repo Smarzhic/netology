@@ -103,3 +103,41 @@ Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-40-generic x86_64)
 Your Hardware Enablement Stack (HWE) is supported until April 2025.
 smarzhic@matrosov:~$
 ```
+6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера
+```
+smarzhic@netology:~/.ssh$ ls
+id_rsa  id_rsa.pub  known_hosts
+smarzhic@netology:~/.ssh$ mv id_rsa secret
+smarzhic@netology:~/.ssh$ ls
+id_rsa.pub  known_hosts  secret
+smarzhic@netology:~/.ssh$ mv id_rsa.pub public.pub
+smarzhic@netology:~/.ssh$ ls
+known_hosts  public.pub  secret
+smarzhic@netology:~/.ssh$
+```
+```
+Файл config
+Host matrosov
+        HostName 192.168.1.60
+        IdentityFile ~/.ssh/public.pub
+        User smarzhic
+        Port 22
+```
+```
+smarzhic@netology:~/.ssh$ ssh matrosov
+Load key "/home/smarzhic/.ssh/public.pub": invalid format
+smarzhic@192.168.1.60's password:
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-40-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+39 updates can be applied immediately.
+22 of these updates are standard security updates.
+Чтобы просмотреть дополнительные обновления выполните: apt list --upgradable
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+Last login: Fri Dec 10 22:56:23 2021 from 192.168.1.69
+smarzhic@matrosov:~$
+```
