@@ -150,3 +150,4 @@ tcpdump: listening on enp0s3, link-type EN10MB (Ethernet), capture size 262144 b
 0 packets dropped by kernel
 smarzhic@netology:~$
 ```
+>![1](https://github.com/Smarzhic/netology/blob/main/03-sysadmin-09-security/7.JPG)  
