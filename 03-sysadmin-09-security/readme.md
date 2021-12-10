@@ -52,4 +52,54 @@ writing new private key to '/etc/ssl/private/apache-selfsigned.key'
  Done 2021-12-08 18:18:21 [  46s] -->> 31.31.196.60:443 (www.globus-stal.ru) <<--
  ```
 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу
-6
+```
+smarzhic@netology:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/smarzhic/.ssh/id_rsa):
+Created directory '/home/smarzhic/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/smarzhic/.ssh/id_rsa
+Your public key has been saved in /home/smarzhic/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:Cc3AYRAXnY9273OK7ySK+bN08pyu7icV6LCXhmbk2xU smarzhic@netology
+The key's randomart image is:
++---[RSA 3072]----+
+|    o+*+ .       |
+|     o.+o        |
+|      . o+       |
+|      o.+.E      |
+|     o *So +     |
+|      * = o .    |
+|     o =ooo..    |
+|      .++*.=o .  |
+|      o+BB*o++   |
++----[SHA256]-----+
+smarzhic@netology:~$ ssh-copy-id smarzhic@192.168.1.60
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/smarzhic/.ssh/id_rsa.pub"
+The authenticity of host '192.168.1.60 (192.168.1.60)' can't be established.
+ECDSA key fingerprint is SHA256:4algMGB1pzwdUdHCNHZgrqhtNdwoGo8PmSDpZY5sCdk.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+smarzhic@192.168.1.60's password:
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'smarzhic@192.168.1.60'"
+and check to make sure that only the key(s) you wanted were added.
+
+smarzhic@netology:~$ ssh 192.168.1.60
+Enter passphrase for key '/home/smarzhic/.ssh/id_rsa':
+Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.11.0-40-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+39 updates can be applied immediately.
+22 of these updates are standard security updates.
+Чтобы просмотреть дополнительные обновления выполните: apt list --upgradable
+
+Your Hardware Enablement Stack (HWE) is supported until April 2025.
+smarzhic@matrosov:~$
+```
