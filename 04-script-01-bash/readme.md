@@ -53,19 +53,16 @@ done
 ### Ваш скрипт:
 ```bash
 #!/bin/bash
-
-for ((i=1; i<5; i++))
-    do 
-while ((1==1))
+hosts=(192.168.0.1 173.194.222.113 87.250.250.242)
+timeout=5
+for i in {1..5}
+do
+date >>host_error.log
+    for h in ${hosts[@]}
     do
-    curl 192.168.0.1:80
-    curl 173.194.222.113:80 
-    curl 87.250.250.242:80
-if (($? != 0))
-then
-    date > curl.log
-fi
-done
+	curl -Is --connect-timeout $timeout $h:80 >/dev/null
+        echo "test" $h status=$? >>host_error.log
+    done
 done
 ```
 
@@ -75,7 +72,7 @@ done
 ### Ваш скрипт:
 ```bash
 #!/bin/bash
-hosts=(192.168.0.1 173.194.222.113 87.250.250.24)
+hosts=(192.168.0.1 173.194.222.113 87.250.250.242)
 timeout=5
 res=0
 
@@ -87,7 +84,7 @@ do
 	res=$?
 	if (($res != 0))
 	then
-	    echo "    ERROR on " $h status=$res >>error.log
+	    echo "ERROR" $h status=$res >>host_error.log
 	fi
     done
 done
