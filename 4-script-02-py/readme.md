@@ -116,8 +116,7 @@ while 1==1 :
 ### Вывод скрипта при запуске при тестировании:
 ```
 C:\Users\Smarzhic\PycharmProjects\Netology\venv\Scripts\python.exe C:/Users/Smarzhic/PycharmProjects/Netology/venv/Lib/test.py
-Проверка доступности сервверов
-{'drive.google.com': '0.0.0.0', 'mail.google.com': '0.0.0.0', 'google.com': '0.0.0.0'}
+Проверка доступности сервверов {'drive.google.com': '0.0.0.0', 'mail.google.com': '0.0.0.0', 'google.com': '0.0.0.0'}
 2021-12-17 21:32:29 [ERROR] drive.google.com IP mistmatch: 0.0.0.0 64.233.165.194
 2021-12-17 21:32:29 [ERROR] mail.google.com IP mistmatch: 0.0.0.0 64.233.165.19
 2021-12-17 21:32:29 [ERROR] google.com IP mistmatch: 0.0.0.0 74.125.205.101
