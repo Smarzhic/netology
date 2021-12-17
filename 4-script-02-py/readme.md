@@ -78,15 +78,14 @@ print('\033[31m')
 result_os = os.popen(' && '.join(bash_command)).read()
 for result in result_os.split('\n'):
     if result.find('fatal') != -1:
-        print('\033[31m Каталог \033[1m '+cmd+'\033[0m\033[31m не является GIT репозиторием\033[0m')    
+        print('\033[31m Каталог \033[1m '+a+'\033[0m\033[31m не является GIT репозиторием\033[0m')
     if result.find('изменено') != -1:
         prepare_result = result.replace('\tmodified: ', '').strip()
         print(cmd+prepare_result)
-#        break
 print('\033[0m')
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+Каталог  /home/vagrant/scripts не является GIT репозиторием
 ```
