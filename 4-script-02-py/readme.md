@@ -43,13 +43,10 @@ import os
 
 bash_command = ["cd ~/devops3-netology", "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
-# is_change = False - лишняя переменная
 for result in result_os.split('\n'):
     if result.find('modified') != -1:
-        prepare_result = result.replace('\tmodified: ', '').strip() #отрезает пробелы по краям строки
+        prepare_result = result.replace('\tmodified: ', '').strip()
         print(prepare_result)
-#        break - следует убрать что бы скрипт не прерывался при первом вхождении
-
 ```
 
 ### Вывод скрипта при запуске при тестировании:
