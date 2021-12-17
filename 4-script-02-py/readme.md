@@ -94,37 +94,38 @@ print('\033[0m')
 
 ### Ваш скрипт:
 ```python
-##!/usr/bin/env python3
+import socket
+import time
+import datetime
 
-import socket as s
-import time as t
-import datetime as dt
-
-# set variables 
+# set variables
 i = 1
-wait = 2 # интервал проверок в секундах
-srv = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
+wait = 2
+serv = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
 init=0
 
-print('*** start script ***')
-print(srv)
-print('********************')
+print('Проверка доступности сервверов')
+print(serv)
 
-while 1==1 : #отладочное число проверок 
-  for host in srv:
-    ip = s.gethostbyname(host)
-    if ip != srv[host]:
+while 1==1 :
+  for host in serv:
+    ip = socket.gethostbyname(host)
+    if ip != serv[host]:
       if i==1 and init !=1:
-        print(str(dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")) +' [ERROR] ' + str(host) +' IP mistmatch: '+srv[host]+' '+ip)
-      srv[host]=ip
-# счетчик итераций для отладки, закомментировать для бесконечного цикла 3 строки
-  i+=1 
-  if i >= 50 : 
-    break
-  t.sleep(wait)
+        print(str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")) +' [ERROR] ' + str(host) +' IP mistmatch: '+serv[host]+' '+ip)
+      serv[host]=ip
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+C:\Users\Smarzhic\PycharmProjects\Netology\venv\Scripts\python.exe C:/Users/Smarzhic/PycharmProjects/Netology/venv/Lib/test.py
+Проверка доступности сервверов
+{'drive.google.com': '0.0.0.0', 'mail.google.com': '0.0.0.0', 'google.com': '0.0.0.0'}
+2021-12-17 21:32:29 [ERROR] drive.google.com IP mistmatch: 0.0.0.0 64.233.165.194
+2021-12-17 21:32:29 [ERROR] mail.google.com IP mistmatch: 0.0.0.0 64.233.165.19
+2021-12-17 21:32:29 [ERROR] google.com IP mistmatch: 0.0.0.0 74.125.205.101
+2021-12-17 21:39:26 [ERROR] mail.google.com IP mistmatch: 64.233.165.19 64.233.165.17
+2021-12-17 21:39:56 [ERROR] google.com IP mistmatch: 74.125.205.101 74.125.205.113
+2021-12-17 21:39:56 [ERROR] mail.google.com IP mistmatch: 64.233.165.17 64.233.165.83
+
 ```
