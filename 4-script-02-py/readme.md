@@ -94,6 +94,8 @@ print('\033[0m')
 
 ### Ваш скрипт:
 ```python
+#!/usr/bin/env python3
+
 import socket
 import time
 import datetime
