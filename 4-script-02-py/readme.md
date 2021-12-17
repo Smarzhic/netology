@@ -106,8 +106,7 @@ wait = 2
 serv = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
 init=0
 
-print('Проверка доступности сервверов')
-print(serv)
+print('Проверка доступности сервверов', serv)
 
 while 1==1 :
   for host in serv:
