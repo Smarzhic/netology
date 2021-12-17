@@ -100,7 +100,6 @@ import socket
 import time
 import datetime
 
-# set variables
 i = 1
 wait = 2
 serv = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
