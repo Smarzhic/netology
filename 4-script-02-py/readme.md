@@ -41,7 +41,7 @@ for result in result_os.split('\n'):
 
 import os
 
-bash_command = ["cd ~/devops3-netology", "git status"]
+bash_command = ["cd ~/devops", "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
 for result in result_os.split('\n'):
     if result.find('modified') != -1:
