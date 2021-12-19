@@ -37,8 +37,6 @@
 #!/usr/bin/env python3
 
 import socket
-import time
-import datetime
 import json
 import yaml
 
@@ -46,47 +44,43 @@ i = 1
 wait = 2
 serv = {'drive.google.com':'0.0.0.0', 'mail.google.com':'0.0.0.0', 'google.com':'0.0.0.0'}
 init=0
+fpath = "C:/Users/Smarzhic/Desktop/DevOps/" # путь к файлам json и yaml
 
-print('Проверка доступности сервверов', serv)
+print("Проверка IP")
 
-while 1==1 :
+while 1:
   for host in serv:
     ip = socket.gethostbyname(host)
     if ip != serv[host]:
-      if i==1 and init !=1:
-        print(str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")) +' [ERROR] ' + str(host) +' IP mistmatch: '+serv[host]+' '+ip)
+      if i==True and init !=1:
+        is_error = True
+        with open(fpath+host+".json",'w') as jsf:
+          json_data= json.dumps({host:ip})
+          jsf.write(json_data)
+        with open(fpath + host + ".yaml", 'w') as ymf:
+          yaml_data = yaml.dump([{host: ip}])
+          ymf.write(yaml_data)
       serv[host]=ip
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+Проверка IP
 ```
 
-### json-файл(ы), который(е) записал ваш скрипт:
+### json-файл(ы), который(е) записал ваш скрипт:  
+Создано 3 файла
 ```json
-???
+{"drive.google.com": "64.233.165.194"}
+{"google.com": "74.125.205.139"}
+{"mail.google.com": "64.233.165.18"}
 ```
 
-### yml-файл(ы), который(е) записал ваш скрипт:
+### yml-файл(ы), который(е) записал ваш скрипт:  
+Создано 3 файла
 ```yaml
-???
+- drive.google.com: 64.233.165.194
+- google.com: 74.125.205.139
+- mail.google.com: 64.233.165.18
 ```
 
-## Дополнительное задание (со звездочкой*) - необязательно к выполнению
-
-Так как команды в нашей компании никак не могут прийти к единому мнению о том, какой формат разметки данных использовать: JSON или YAML, нам нужно реализовать парсер из одного формата в другой. Он должен уметь:
-   * Принимать на вход имя файла
-   * Проверять формат исходного файла. Если файл не json или yml - скрипт должен остановить свою работу
-   * Распознавать какой формат данных в файле. Считается, что файлы *.json и *.yml могут быть перепутаны
-   * Перекодировать данные из исходного формата во второй доступный (из JSON в YAML, из YAML в JSON)
-   * При обнаружении ошибки в исходном файле - указать в стандартном выводе строку с ошибкой синтаксиса и её номер
-   * Полученный файл должен иметь имя исходного файла, разница в наименовании обеспечивается разницей расширения файлов
-
-### Ваш скрипт:
-```python
-???
-```
-
-### Пример работы скрипта:
-???
