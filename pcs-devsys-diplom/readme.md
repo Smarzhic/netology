@@ -56,3 +56,15 @@ To                         Action      From
 22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
 443 (v6)                   ALLOW IN    Anywhere (v6)
 ```
+## 3.Установите hashicorp vault
+Рассмотрим установку из репозитория.
+```
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp.list
+sudo apt-get update
+snap install vault
+```
+Далее разрешаем автозапуск службы и если она не запущена, запускаем
+```
+systemctl enable vault --now
+```
