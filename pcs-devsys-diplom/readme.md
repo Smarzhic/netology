@@ -251,12 +251,12 @@ smarzhic@websrv:~$ vault secrets enable pki
 Success! Enabled the pki secrets engine at: pki/
 smarzhic@websrv:~$ vault secrets tune -max-lease-ttl=87600h pki
 Success! Tuned the secrets engine at: pki/
-smarzhic@websrv:~$ vault write -field=certificate pki/root/generate/internal common_name=project.devel ttl=87600 > CA_cert.crt
+smarzhic@websrv:~$ vault write -field=certificate pki/root/generate/internal common_name=kurs.dev ttl=87600 > CA_cert.crt
 smarzhic@websrv:~$ vault write pki/config/urls issuing_certificates="$VAULT_ADDR/v1/pki/ca" crl_distribution_points="$VAULT_ADDR/v1/pki/crl "
 Success! Data written to: pki/config/urls
 smarzhic@websrv:~$
 ```
-###Далее промежуточный сертификат.
+### Далее промежуточный сертификат.
 ```
 smarzhic@websrv:~$ vault secrets enable -path=pki_int pki
 Success! Enabled the pki secrets engine at: pki_int/
@@ -267,5 +267,10 @@ smarzhic@websrv:~$ vault write -format=json pki_int/intermediate/generate/intern
 smarzhic@websrv:~$ vault write -format=json pki/root/sign-intermediate csr=@pki_intermediate.csr format=pem_bundle ttl="43800h"| jq -r '.da ta.certificate' > intermediate.cert.pem
 smarzhic@websrv:~$ vault write pki_int/intermediate/set-signed certificate=@intermediate.cert.pem
 Success! Data written to: pki_int/intermediate/set-signed
+```
+### Создаем роль серверу
+```
+smarzhic@websrv:~$  vault write pki_int/roles/project-dot-devel allowed_domains="project.devel" allow_bare_domains=true allow_subdomains=tr ue max_ttl="720h"
+Success! Data written to: pki_int/roles/project-dot-de
 ```
 
