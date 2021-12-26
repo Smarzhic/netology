@@ -40,6 +40,8 @@ sudo ufw default allow outgoing
 ```
 sudo ufw allow OpenSSH
 sudo ufw allow 443
+sudo ufw allow in on lo to any
+sudo ufw allow out on lo to any
 ```
 Проверим созданые правила
 ```
@@ -53,8 +55,13 @@ To                         Action      From
 --                         ------      ----
 22/tcp (OpenSSH)           ALLOW IN    Anywhere
 443                        ALLOW IN    Anywhere
+Anywhere on lo             ALLOW IN    Anywhere
 22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
 443 (v6)                   ALLOW IN    Anywhere (v6)
+Anywhere (v6) on lo        ALLOW IN    Anywhere (v6)
+
+Anywhere                   ALLOW OUT   Anywhere on lo
+Anywhere (v6)              ALLOW OUT   Anywhere (v6) on lo
 ```
 ## 3.Установите hashicorp vault
 Рассмотрим установку из репозитория.
@@ -118,4 +125,29 @@ Dec 26 02:01:19 websrv vault[29817]:                  Storage: file
 Dec 26 02:01:19 websrv vault[29817]:                  Version: Vault v1.9.2
 Dec 26 02:01:19 websrv vault[29817]:              Version Sha: f4c6d873e2767c0d6853b5d9ffc77b0d297bfbdf[m
 Dec 26 02:01:19 websrv vault[29817]: ==> Vault server started! Log data will stream in below:
+```
+Настройка рабочего окружения. Раскоментируем и отредактируем следующие строки
+```
+vi /etc/vault.d/vault.hcl
+listener "tcp" {
+  address = "127.0.0.1:8201"
+  tls_disable = 1
+}
+```
+export VAULT_ADDR=http://127.0.0.1:8201
+```
+```
+smarzhic@websrv:~$ vault status
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        false
+Sealed             true
+Total Shares       0
+Threshold          0
+Unseal Progress    0/0
+Unseal Nonce       n/a
+Version            1.9.2
+Storage Type       file
+HA Enabled         false
 ```
