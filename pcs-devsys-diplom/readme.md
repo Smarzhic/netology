@@ -59,12 +59,63 @@ To                         Action      From
 ## 3.Установите hashicorp vault
 Рассмотрим установку из репозитория.
 ```
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp.list
-sudo apt-get update
-snap install vault
+sudo curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt update && sudo apt install vault
 ```
-Далее разрешаем автозапуск службы и если она не запущена, запускаем
 ```
-systemctl enable vault --now
+smarzhic@websrv:~$ vault
+Usage: vault <command> [args]
+
+Common commands:
+    read        Read data and retrieves secrets
+    write       Write data, configuration, and secrets
+    delete      Delete secrets and configuration
+    list        List data or secrets
+    login       Authenticate locally
+    agent       Start a Vault agent
+    server      Start a Vault server
+    status      Print seal and HA status
+    unwrap      Unwrap a wrapped secret
+
+Other commands:
+    audit          Interact with audit devices
+    auth           Interact with auth methods
+    debug          Runs the debug command
+    kv             Interact with Vault's Key-Value storage
+    lease          Interact with leases
+    monitor        Stream log messages from a Vault server
+    namespace      Interact with namespaces
+    operator       Perform operator-specific tasks
+    path-help      Retrieve API help for paths
+    plugin         Interact with Vault plugins and catalog
+    policy         Interact with policies
+    print          Prints runtime configurations
+    secrets        Interact with secrets engines
+    ssh            Initiate an SSH session
+    token          Interact with tokens
+```
+## 4.Создайте центр сертификации по инструкциии выпустите сертификат для использования его в настройке веб-сервера nginx (срок жизни сертификата - месяц).
+Устанавливаем дополнительный пакет jq, запускаем сервис, утанавливаем переменные.
+```
+sudo apt install jq
+sudo systemctl start vault.service
+smarzhic@websrv:~$ sudo systemctl status vault.service
+● vault.service - "HashiCorp Vault - A tool for managing secrets"
+     Loaded: loaded (/lib/systemd/system/vault.service; disabled; vendor preset: enabled)
+     Active: active (running) since Sun 2021-12-26 02:01:18 MSK; 16s ago
+       Docs: https://www.vaultproject.io/docs/
+   Main PID: 29817 (vault)
+      Tasks: 7 (limit: 1071)
+     Memory: 53.8M
+     CGroup: /system.slice/vault.service
+             └─29817 /usr/bin/vault server -config=/etc/vault.d/vault.hcl
+
+Dec 26 02:01:19 websrv vault[29817]:                Log Level: info
+Dec 26 02:01:19 websrv vault[29817]:                    Mlock: supported: true, enabled: true
+Dec 26 02:01:19 websrv vault[29817]:            Recovery Mode: false
+Dec 26 02:01:19 websrv vault[29817]:                  Storage: file
+Dec 26 02:01:19 websrv vault[29817]:                  Version: Vault v1.9.2
+Dec 26 02:01:19 websrv vault[29817]:              Version Sha: f4c6d873e2767c0d6853b5d9ffc77b0d297bfbdf[m
+Dec 26 02:01:19 websrv vault[29817]: ==> Vault server started! Log data will stream in below:
 ```
