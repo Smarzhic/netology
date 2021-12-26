@@ -106,7 +106,7 @@ Other commands:
 Устанавливаем дополнительный пакет jq, запускаем сервис, утанавливаем переменные.
 ```
 sudo apt install jq
-sudo systemctl start vault.service
+systemctl enable vault --now
 smarzhic@websrv:~$ sudo systemctl status vault.service
 ● vault.service - "HashiCorp Vault - A tool for managing secrets"
      Loaded: loaded (/lib/systemd/system/vault.service; disabled; vendor preset: enabled)
@@ -155,11 +155,11 @@ HA Enabled         false
 ### Инициализируем новый Vault
 ```
 smarzhic@websrv:~$ vault operator init -key-shares=3 -key-threshold=2
-Unseal Key 1: ohe0N2Kbi1Yu9MWgwHP56fwXL7wBnZXwg3n6HdeaxRkQ
-Unseal Key 2: t+oSAja4m/E8OoTXq3UIg/Pp0wDAm1hGEwR4JOD8syR7
-Unseal Key 3: slFRTCJhMzWB8JUasErNHx/A76rmpACtjIhaFLse+T5g
+Unseal Key 1: 0vDssfBOYdO7vV4Bs33rT8FtivlsiF4x+V/Lr+yeN5Yy
+Unseal Key 2: duJqgC9aObh/KXVn48/XXKP7q4YBsPMrCP0cuLmN3BAq
+Unseal Key 3: ZgRdaTNMOgL2+CEOu5ntkmp69CpLKpCWyB1b1mlDoSfH
 
-Initial Root Token: s.r5FctG8eu2nJYJztuIHuzuZN
+Initial Root Token: s.MuMDp0ENgwiylIw46hH3hDu2
 
 Vault initialized with 3 key shares and a key threshold of 2. Please securely
 distribute the key shares printed above. When the Vault is re-sealed,
@@ -176,10 +176,10 @@ existing unseal keys shares. See "vault operator rekey" for more information.
 ```
 smarzhic@websrv:~$ vault operator init -key-shares=3 -key-threshold=2
 Unseal Key 1: ohe0N2Kbi1Yu9MWgwHP56fwXL7wBnZXwg3n6HdeaxRkQ
-Unseal Key 2: t+oSAja4m/E8OoTXq3UIg/Pp0wDAm1hGEwR4JOD8syR7
-Unseal Key 3: slFRTCJhMzWB8JUasErNHx/A76rmpACtjIhaFLse+T5g
+Unseal Key 2: duJqgC9aObh/KXVn48/XXKP7q4YBsPMrCP0cuLmN3BAq
+Unseal Key 3: ZgRdaTNMOgL2+CEOu5ntkmp69CpLKpCWyB1b1mlDoSfH
 
-Initial Root Token: s.r5FctG8eu2nJYJztuIHuzuZN
+Initial Root Token: s.MuMDp0ENgwiylIw46hH3hDu2
 
 Vault initialized with 3 key shares and a key threshold of 2. Please securely
 distribute the key shares printed above. When the Vault is re-sealed,
