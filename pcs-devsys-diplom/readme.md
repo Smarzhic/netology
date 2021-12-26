@@ -151,4 +151,5 @@ Unseal Nonce       n/a
 Version            1.9.2
 Storage Type       file
 HA Enabled         false
-```
+````
+## Инициализируем новый Vault
