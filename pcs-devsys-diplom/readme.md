@@ -152,4 +152,96 @@ Version            1.9.2
 Storage Type       file
 HA Enabled         false
 ````
-## Инициализируем новый Vault
+### Инициализируем новый Vault
+```
+smarzhic@websrv:~$ vault operator init -key-shares=3 -key-threshold=2
+Unseal Key 1: ohe0N2Kbi1Yu9MWgwHP56fwXL7wBnZXwg3n6HdeaxRkQ
+Unseal Key 2: t+oSAja4m/E8OoTXq3UIg/Pp0wDAm1hGEwR4JOD8syR7
+Unseal Key 3: slFRTCJhMzWB8JUasErNHx/A76rmpACtjIhaFLse+T5g
+
+Initial Root Token: s.r5FctG8eu2nJYJztuIHuzuZN
+
+Vault initialized with 3 key shares and a key threshold of 2. Please securely
+distribute the key shares printed above. When the Vault is re-sealed,
+restarted, or stopped, you must supply at least 2 of these keys to unseal it
+before it can start servicing requests.
+
+Vault does not store the generated master key. Without at least 2 keys to
+reconstruct the master key, Vault will remain permanently sealed!
+
+It is possible to generate new unseal keys, provided you have a quorum of
+existing unseal keys shares. See "vault operator rekey" for more information.
+```
+### Подключаемся к новому Vault.
+```
+smarzhic@websrv:~$ vault operator init -key-shares=3 -key-threshold=2
+Unseal Key 1: ohe0N2Kbi1Yu9MWgwHP56fwXL7wBnZXwg3n6HdeaxRkQ
+Unseal Key 2: t+oSAja4m/E8OoTXq3UIg/Pp0wDAm1hGEwR4JOD8syR7
+Unseal Key 3: slFRTCJhMzWB8JUasErNHx/A76rmpACtjIhaFLse+T5g
+
+Initial Root Token: s.r5FctG8eu2nJYJztuIHuzuZN
+
+Vault initialized with 3 key shares and a key threshold of 2. Please securely
+distribute the key shares printed above. When the Vault is re-sealed,
+restarted, or stopped, you must supply at least 2 of these keys to unseal it
+before it can start servicing requests.
+
+Vault does not store the generated master key. Without at least 2 keys to
+reconstruct the master key, Vault will remain permanently sealed!
+
+It is possible to generate new unseal keys, provided you have a quorum of
+existing unseal keys shares. See "vault operator rekey" for more information.
+smarzhic@websrv:~$ vault operator unseal ohe0N2Kbi1Yu9MWgwHP56fwXL7wBnZXwg3n6HdeaxRkQ
+Key                Value
+---                -----
+Seal Type          shamir
+Initialized        true
+Sealed             true
+Total Shares       3
+Threshold          2
+Unseal Progress    1/2
+Unseal Nonce       bc32d7db-aaa2-ecae-1b65-a2ab56e9d398
+Version            1.9.2
+Storage Type       file
+HA Enabled         false
+smarzhic@websrv:~$ vault operator unseal t+oSAja4m/E8OoTXq3UIg/Pp0wDAm1hGEwR4JOD8syR7
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    3
+Threshold       2
+Version         1.9.2
+Storage Type    file
+Cluster Name    vault-cluster-7e02673a
+Cluster ID      f06761f9-78d7-66aa-0c3c-32346f48ace6
+HA Enabled      false
+smarzhic@websrv:~$ vault operator unseal slFRTCJhMzWB8JUasErNHx/A76rmpACtjIhaFLse+T5g
+Key             Value
+---             -----
+Seal Type       shamir
+Initialized     true
+Sealed          false
+Total Shares    3
+Threshold       2
+Version         1.9.2
+Storage Type    file
+Cluster Name    vault-cluster-7e02673a
+Cluster ID      f06761f9-78d7-66aa-0c3c-32346f48ace6
+HA Enabled      false
+smarzhic@websrv:~$  vault login s.r5FctG8eu2nJYJztuIHuzuZN
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
+
+Key                  Value
+---                  -----
+token                s.r5FctG8eu2nJYJztuIHuzuZN
+token_accessor       DEBbz4Ae0uzOVVorn2jJRDVm
+token_duration       ∞
+token_renewable      false
+token_policies       ["root"]
+identity_policies    []
+policies             ["root"]
+```
