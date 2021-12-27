@@ -305,6 +305,6 @@ systemctl stop vault.service
 # restart nginx
 systemctl reload nginx
 ```
-```
+### Зададим права доступа
 chmod 755 update_crt.sh
-```
+
