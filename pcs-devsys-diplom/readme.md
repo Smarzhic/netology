@@ -275,3 +275,5 @@ sudo cat project.devel.raw.json | jq -r '.data.private_key' > /etc/ssl/private/k
 ```
 systemctl reload nginx
 ```
+### Откройте в браузере на хосте https адрес страницы, которую обслуживает сервер nginx.
+![PID 1](https://github.com/Smarzhic/netology/blob/main/pcs-devsys-diplom/cert.JPG)
