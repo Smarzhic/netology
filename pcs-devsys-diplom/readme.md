@@ -276,4 +276,34 @@ sudo cat project.devel.raw.json | jq -r '.data.private_key' > /etc/ssl/private/k
 systemctl reload nginx
 ```
 ### Откройте в браузере на хосте https адрес страницы, которую обслуживает сервер nginx.
-![PID 1](https://github.com/Smarzhic/netology/blob/main/pcs-devsys-diplom/cert.JPG)
+![PID 1](https://github.com/Smarzhic/netology/blob/main/pcs-devsys-diplom/cert.JPG)  
+
+### Создайте скрипт, который будет генерировать новый сертификат в vault:
+```bash
+
+#!/usr/bin/env bash
+
+#Start HashiCorp vault.service
+systemctl start vault.service
+sleep 10
+
+#Open vault
+export VAULT_ADDR='http://127.0.0.1:8201'
+vault operator unseal Zx5yPxzJXT+pI4aYsbnCdlf9i+Xe/Yirz2KQpQAVHzEJ
+vault operator unseal BWHlNymujpbzD3YqC2r9rxE5Q8vEnQOewOG4kcNcQxAG
+vault login s.l7pwcXDAyouEnkdcx0tg8DWe
+
+#Generate new certificate
+TEMP_DATA=$(vault write -format=json pki_int/issue/project-dot-devel common_name="project.devel" ttl="720h")
+jq -r '.data.certificate' <<< "$TEMP_DATA" > /etc/ssl/certs/kurs.dev.crt
+jq -r '.data.ca_chain[]' <<< "$TEMP_DATA" >> /etc/ssl/certs/kurs.dev.crt
+jq -r '.data.private_key' <<< "$TEMP_DATA" > /etc/ssl/private/kurs.dev.key
+
+#Stop HashiCorp vault.service
+systemctl stop vault.service
+
+# restart nginx
+systemctl reload nginx
+
+chmod 755 update_crt.sh
+```
