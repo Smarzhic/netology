@@ -244,6 +244,25 @@ Dec 27 13:08:05 websrv systemd[1]: Started A high performance web server and a r
 ```
 ## Настройте nginx на https, используя ранее подготовленный сертификат:
 ```
-sudo mkdir -p /var/www//kurs.dev/html/
-/var/www/html$ sudo cp /var/www/html/index.nginx-debian.html /var/www/kurs.dev/html/index.html
+server {
+        listen 443 ssl;
 
+        root /var/www/html;
+        index index.html;
+
+        server_name project.devel;
+
+        ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
+        ssl_ciphers         HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers on;
+
+        ssl_certificate     /etc/ssl/certs/project.devel.crt;
+        ssl_certificate_key /etc/ssl/private/project.devel.key;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
+```
+sudo cat project.devel.raw.json | jq -r '.data.certificate' > /etc/ssl/certs/project.devel.crt
