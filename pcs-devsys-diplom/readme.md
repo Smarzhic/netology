@@ -214,7 +214,7 @@ vault write pki_int/roles/project-dot-devel allowed_domains="kurs.dev" allow_bar
 ```
 vault write -format=json pki_int/issue/project-dot-devel common_name="kurs.dev" ttl="720h" > project.devel.raw.json
 ```
-## Установите корневой сертификат созданного центра сертификации в доверенные в хостовой системе.
+## 5. Установите корневой сертификат созданного центра сертификации в доверенные в хостовой системе.
 ```
 smarzhic@websrv:~$ sudo mv CA_cert.crt /usr/local/share/ca-certificates/CA_cert.crt
 [sudo] password for smarzhic:
@@ -224,7 +224,7 @@ Updating certificates in /etc/ssl/certs...
 Running hooks in /etc/ca-certificates/update.d...
 done.
 ```
-## Установите nginx.
+## 6. Установите nginx.
 ```
 sudo apt install nginx
 smarzhic@websrv:~$ systemctl status nginx
@@ -242,7 +242,7 @@ smarzhic@websrv:~$ systemctl status nginx
 Dec 27 13:08:05 websrv systemd[1]: Starting A high performance web server and a reverse proxy server...
 Dec 27 13:08:05 websrv systemd[1]: Started A high performance web server and a reverse proxy server.
 ```
-## Настройте nginx на https, используя ранее подготовленный сертификат:
+## 7. Настройте nginx на https, используя ранее подготовленный сертификат:
 Настраиваем nginx на использование SSL
 ```
 server {
@@ -275,10 +275,10 @@ sudo cat project.devel.raw.json | jq -r '.data.private_key' > /etc/ssl/private/k
 ```
 systemctl reload nginx
 ```
-### Откройте в браузере на хосте https адрес страницы, которую обслуживает сервер nginx.
+### 8. Откройте в браузере на хосте https адрес страницы, которую обслуживает сервер nginx.
 ![PID 1](https://github.com/Smarzhic/netology/blob/main/pcs-devsys-diplom/cert.JPG)  
 
-### Создайте скрипт, который будет генерировать новый сертификат в vault:
+### 9. Создайте скрипт, который будет генерировать новый сертификат в vault:
 ```bash
 
 #!/usr/bin/env bash
@@ -308,7 +308,7 @@ systemctl reload nginx
 ### Зададим права доступа
 chmod 755 update_crt.sh
 
-### Поместите скрипт в crontab, чтобы сертификат обновлялся какого-то числа каждого месяца в удобное для вас время.
+### 10. Поместите скрипт в crontab, чтобы сертификат обновлялся какого-то числа каждого месяца в удобное для вас время.
 ```
 49 21 * * * /root/script/update_crt.sh 
 ```
