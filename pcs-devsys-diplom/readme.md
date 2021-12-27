@@ -155,11 +155,11 @@ HA Enabled         false
 ### Инициализируем новый Vault
 ```
 smarzhic@websrv:~$ vault operator init -key-shares=3 -key-threshold=2
-Unseal Key 1: 0vDssfBOYdO7vV4Bs33rT8FtivlsiF4x+V/Lr+yeN5Yy
-Unseal Key 2: duJqgC9aObh/KXVn48/XXKP7q4YBsPMrCP0cuLmN3BAq
-Unseal Key 3: ZgRdaTNMOgL2+CEOu5ntkmp69CpLKpCWyB1b1mlDoSfH
+Unseal Key 1: Zx5yPxzJXT+pI4aYsbnCdlf9i+Xe/Yirz2KQpQAVHzEJ
+Unseal Key 2: gEW+xZ+Hfe2eYQQ465kIHwgo2RR4qSwoLzyv8s+q5iDp
+Unseal Key 3: BWHlNymujpbzD3YqC2r9rxE5Q8vEnQOewOG4kcNcQxAG
 
-Initial Root Token: s.MuMDp0ENgwiylIw46hH3hDu2
+Initial Root Token: s.l7pwcXDAyouEnkdcx0tg8DWe
 
 Vault initialized with 3 key shares and a key threshold of 2. Please securely
 distribute the key shares printed above. When the Vault is re-sealed,
@@ -174,23 +174,44 @@ existing unseal keys shares. See "vault operator rekey" for more information.
 ```
 ### Подключаемся к новому Vault.
 ```
+smarzhic@websrv:~$ vault operator unseal Zx5yPxzJXT+pI4aYsbnCdlf9i+Xe/Yirz2KQpQAVHzEJ
+smarzhic@websrv:~$ vault operator unseal BWHlNymujpbzD3YqC2r9rxE5Q8vEnQOewOG4kcNcQxAG
+smarzhic@websrv:~$ vault login s.l7pwcXDAyouEnkdcx0tg8DWe
+Success! You are now authenticated. The token information displayed below
+is already stored in the token helper. You do NOT need to run "vault login"
+again. Future Vault requests will automatically use this token.
 
+Key                  Value
+---                  -----
+token                s.l7pwcXDAyouEnkdcx0tg8DWe
+token_accessor       9zJqcGRuAIelH1eR0PeI8eIa
+token_duration       ∞
+token_renewable      false
+token_policies       ["root"]
+identity_policies    []
+policies             ["root"]
 ```
-### Далее промежуточный сертификат.
+### Содаем ключ и сертификат для центра сертификации.
 ```
-smarzhic@websrv:~$ vault secrets enable -path=pki_int pki
-Success! Enabled the pki secrets engine at: pki_int/
-smarzhic@websrv:~$ vault secrets tune -max-lease-ttl=43800h pki_int
-Success! Tuned the secrets engine at: pki_int/
-smarzhic@websrv:~$ vault write -format=json pki_int/intermediate/generate/internal common_name="project.devel Intermediate Authority" | jq
--r '.data.csr' > pki_intermediate.csr
-smarzhic@websrv:~$ vault write -format=json pki/root/sign-intermediate csr=@pki_intermediate.csr format=pem_bundle ttl="43800h"| jq -r '.da ta.certificate' > intermediate.cert.pem
-smarzhic@websrv:~$ vault write pki_int/intermediate/set-signed certificate=@intermediate.cert.pem
-Success! Data written to: pki_int/intermediate/set-signed
+vault secrets enable pki
+vault secrets tune -max-lease-ttl=87600h pki
+vault write -field=certificate pki/root/generate/internal common_name=kurs.dev ttl=87600 > CA_cert.crt
+vault write pki/config/urls issuing_certificates="$VAULT_ADDR/v1/pki/ca" crl_distribution_points="$VAULT_ADDR/v1/pki/crl"
+```
+### Создаем промежуточный сертификат.
+```
+vault secrets enable -path=pki_int pki
+vault secrets tune -max-lease-ttl=43800h pki_int
+vault write -format=json pki_int/intermediate/generate/internal common_name="kurs.dev Intermediate Authority" | jq -r '.data.csr' > pki_intermediate.csr
+vault write -format=json pki/root/sign-intermediate csr=@pki_intermediate.csr format=pem_bundle ttl="43800h"| jq -r '.data.certificate' > intermediate.cert.pem
+vault write pki_int/intermediate/set-signed certificate=@intermediate.cert.pem
 ```
 ### Создаем роль серверу
 ```
-smarzhic@websrv:~$  vault write pki_int/roles/project-dot-devel allowed_domains="project.devel" allow_bare_domains=true allow_subdomains=tr ue max_ttl="720h"
-Success! Data written to: pki_int/roles/project-dot-de
+vault write pki_int/roles/project-dot-devel allowed_domains="kurs.dev" allow_bare_domains=true allow_subdomains=true max_ttl="720h"
 ```
-
+### Генерируем сертификат для домена на месяц.
+```
+vault write -format=json pki_int/issue/project-dot-devel common_name="kurs.dev" ttl="720h" > project.devel.raw.json
+```
+## Установите корневой сертификат созданного центра сертификации в доверенные в хостовой системе.
