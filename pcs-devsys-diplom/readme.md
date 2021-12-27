@@ -294,7 +294,7 @@ vault operator unseal BWHlNymujpbzD3YqC2r9rxE5Q8vEnQOewOG4kcNcQxAG
 vault login s.l7pwcXDAyouEnkdcx0tg8DWe
 
 #Generate new certificate
-TEMP_DATA=$(vault write -format=json pki_int/issue/project-dot-devel common_name="project.devel" ttl="720h")
+TEMP_DATA=$(vault write -format=json pki_int/issue/project-dot-devel common_name="kurs.dev" ttl="720h")
 jq -r '.data.certificate' <<< "$TEMP_DATA" > /etc/ssl/certs/kurs.dev.crt
 jq -r '.data.ca_chain[]' <<< "$TEMP_DATA" >> /etc/ssl/certs/kurs.dev.crt
 jq -r '.data.private_key' <<< "$TEMP_DATA" > /etc/ssl/private/kurs.dev.key
