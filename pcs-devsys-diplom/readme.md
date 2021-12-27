@@ -215,3 +215,35 @@ vault write pki_int/roles/project-dot-devel allowed_domains="kurs.dev" allow_bar
 vault write -format=json pki_int/issue/project-dot-devel common_name="kurs.dev" ttl="720h" > project.devel.raw.json
 ```
 ## Установите корневой сертификат созданного центра сертификации в доверенные в хостовой системе.
+```
+smarzhic@websrv:~$ sudo mv CA_cert.crt /usr/local/share/ca-certificates/CA_cert.crt
+[sudo] password for smarzhic:
+smarzhic@websrv:~$ sudo update-ca-certificates
+Updating certificates in /etc/ssl/certs...
+1 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+```
+## Установите nginx.
+```
+sudo apt install nginx
+smarzhic@websrv:~$ systemctl status nginx
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Mon 2021-12-27 13:08:05 MSK; 31s ago
+       Docs: man:nginx(8)
+   Main PID: 27296 (nginx)
+      Tasks: 2 (limit: 1071)
+     Memory: 4.9M
+     CGroup: /system.slice/nginx.service
+             ├─27296 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+             └─27297 nginx: worker process
+
+Dec 27 13:08:05 websrv systemd[1]: Starting A high performance web server and a reverse proxy server...
+Dec 27 13:08:05 websrv systemd[1]: Started A high performance web server and a reverse proxy server.
+```
+## Настройте nginx на https, используя ранее подготовленный сертификат:
+```
+sudo mkdir -p /var/www//kurs.dev/html/
+/var/www/html$ sudo cp /var/www/html/index.nginx-debian.html /var/www/kurs.dev/html/index.html
+
