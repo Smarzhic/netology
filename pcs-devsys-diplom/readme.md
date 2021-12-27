@@ -243,6 +243,7 @@ Dec 27 13:08:05 websrv systemd[1]: Starting A high performance web server and a 
 Dec 27 13:08:05 websrv systemd[1]: Started A high performance web server and a reverse proxy server.
 ```
 ## Настройте nginx на https, используя ранее подготовленный сертификат:
+Настраиваем nginx на использование SSL
 ```
 server {
         listen 443 ssl;
@@ -250,19 +251,27 @@ server {
         root /var/www/html;
         index index.html;
 
-        server_name project.devel;
+        server_name kurs.dev;
 
         ssl_protocols       TLSv1 TLSv1.1 TLSv1.2;
         ssl_ciphers         HIGH:!aNULL:!MD5;
         ssl_prefer_server_ciphers on;
 
-        ssl_certificate     /etc/ssl/certs/project.devel.crt;
-        ssl_certificate_key /etc/ssl/private/project.devel.key;
+        ssl_certificate     /etc/ssl/certs/kurs.dev.crt;
+        ssl_certificate_key /etc/ssl/private/kurs.dev.key;
 
         location / {
                 try_files $uri $uri/ =404;
         }
 }
 ```
+Создаем цепочку сертификатов
 ```
-sudo cat project.devel.raw.json | jq -r '.data.certificate' > /etc/ssl/certs/project.devel.crt
+sudo cat project.devel.raw.json | jq -r '.data.certificate' > /etc/ssl/certs/kurs.dev.crt
+sudo cat project.devel.raw.json | jq -r '.data.ca_chain[]' >> /etc/ssl/certs/kurs.dev.crt
+sudo cat project.devel.raw.json | jq -r '.data.private_key' > /etc/ssl/private/kurs.dev.key
+```
+Перезагружаем сервис nginx что бы применились изменения
+```
+systemctl reload nginx
+```
