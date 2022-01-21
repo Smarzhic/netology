@@ -36,4 +36,12 @@
 - Vagrant
 - Ansible
 ```
+smarzhic@SmarzhicPC:/mnt/e/vagrant$ ansible --version
+ansible [core 2.12.1]
+
+smarzhic@SmarzhicPC:/mnt/e/vagrant$ vagrant --version
+Vagrant 2.2.6
+
+smarzhic@SmarzhicPC:/mnt/e/vagrant$ vbox-img.exe --version
+6.1.30r148432
 ```
