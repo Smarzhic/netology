@@ -45,3 +45,32 @@ Vagrant 2.2.6
 smarzhic@SmarzhicPC:/mnt/e/vagrant$ vbox-img.exe --version
 6.1.30r148432
 ```
+## Задача 4
+```
+Из за гетерогенной среды выполнение задачи было усложнено.
+
+Настраиваем окружение
+
+export VAGRANT_WSL_ENABLE_WINDOWS_ACCESS="1"
+export PATH="${PATH}:/mnt/c/Program Files/Oracle/VirtualBox"
+
+Устанавливаем pip
+
+smarzhic@SmarzhicPC:~/vagrant/v1$ sudo apt-get install pip
+
+Устанавливаем Ansible версии 2.9 т.к в более поздних версиях убрана выполнение команды "sudo"
+
+smarzhic@SmarzhicPC:~/vagrant/v1$ sudo pip install ansible==2.9
+
+Запускаем виртуальную машину
+smarzhic@SmarzhicPC:~/vagrant/v1$ vagrant up
+
+Подключаемся к ней
+
+smarzhic@SmarzhicPC:~/vagrant/v1$ vagrant ssh
+
+Убеждаемся что докер установлен и работает
+
+vagrant@server1:~$ docker ps
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
