@@ -46,6 +46,12 @@ smarzhic@SmarzhicPC:/mnt/e/vagrant$ vbox-img.exe --version
 6.1.30r148432
 ```
 ## Задача 4
+
+Воспроизвести практическую часть лекции самостоятельно.
+
+- Создать виртуальную машину.
+- Зайти внутрь ВМ, убедиться, что Docker установлен с помощью команды
+
 ```
 Из за гетерогенной среды выполнение задачи было усложнено.
 
@@ -58,7 +64,7 @@ export PATH="${PATH}:/mnt/c/Program Files/Oracle/VirtualBox"
 
 smarzhic@SmarzhicPC:~/vagrant/v1$ sudo apt-get install pip
 
-Устанавливаем Ansible версии 2.9 т.к в более поздних версиях убрана выполнение команды "sudo"
+Устанавливаем Ansible версии 2.9 т.к в более поздних версиях убрана поддержка команды "sudo"
 
 smarzhic@SmarzhicPC:~/vagrant/v1$ sudo pip install ansible==2.9
 
