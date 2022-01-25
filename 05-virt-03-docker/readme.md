@@ -79,3 +79,29 @@ vagrant@server1:/home$ docker push smarzhic/nginx_imdevops:netology
 | Мониторинг-стек на базе Prometheus и Grafana|Использование докера целессобразно так как нет требования к целостности данных + скорость развертывания|
 | MongoDB, как основное хранилище данных для java-приложения| докер не подходит из за существенной вероятности потери данных. Праивльно будет использовать вирт машины или физ серевера.|
 | Gitlab сервер для реализации CI/CD процессов и приватный (закрытый) Docker Registry| физические сервера или вирт машины|
+## Задача 3
+Запустите первый контейнер из образа centos c любым тэгом в фоновом режиме, подключив папку /data из текущей рабочей директории на хостовой машине в /data контейнера;
+```
+vagrant@server1:/home$ docker run -dti --name centos -v /data:/data centos
+```
+Запустите второй контейнер из образа debian в фоновом режиме, подключив папку /data из текущей рабочей директории на хостовой машине в /data контейнера;
+```
+docker run -dti --name debian -v /data:/data debian
+```
+Подключитесь к первому контейнеру с помощью docker exec и создайте текстовый файл любого содержания в /data;
+```
+vagrant@server1:/home$ docker exec -ti centos bash
+[root@6f40b94bf47a /]# cd data/
+[root@6f40b94bf47a data]# touch test.txt
+```
+Добавьте еще один файл в папку /data на хостовой машине
+```
+vagrant@server1:/home/data$ cd /data
+vagrant@server1:/data$ sudo touch test2.txt
+```
+Подключитесь во второй контейнер и отобразите листинг и содержание файлов в /data контейнера
+```
+vagrant@server1:~$ docker exec -ti debian bash
+root@d3e823df61ac:/# ls data/
+test.txt  test2.txt
+```
