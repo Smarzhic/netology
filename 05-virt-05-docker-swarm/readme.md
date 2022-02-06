@@ -4,16 +4,25 @@
 Дайте письменые ответы на следующие вопросы:
 
 - В чём отличие режимов работы сервисов в Docker Swarm кластере: replication и global? 
-- Какой алгоритм выбора лидера используется в Docker Swarm кластере?
-- Что такое Overlay Network?
-## Задача 2
 
-<p align="center">
-  <img width="1200" height="600" src="https://github.com/Smarzhic/netology/blob/main/05-virt-05-docker-swarm/1.JPG">
-</p>
+>Режим replication указывает, что экземпляров описанного контейнера в кластере docker-swarm может быть сколько угодно, а режим global - по одному экземпляру контейнера на каждой ноде
+
+- Какой алгоритм выбора лидера используется в Docker Swarm кластере?
+>Raft
+- Что такое Overlay Network?
+>Overlay сеть это виртуальная подсеть создаваемая кластером docker-swarm для связи контейнеров между собой (даже если они находятся на разных хостах). Таким образом при необходимости обеспечивается сетевое разделение сервисов, что в свою очередь положительно влияет на безопасность.
+>
+## Задача 2
+Создать ваш первый Docker Swarm кластер в Яндекс.Облаке
+
+(![Screenshot](https://github.com/Smarzhic/netology/blob/main/05-virt-05-docker-swarm/1.JPG) 
 
 ## Задача 3
+Создать ваш первый, готовый к боевой эксплуатации кластер мониторинга, состоящий из стека микросервисов.
 
-<p align="center">
-  <img width="1200" height="600" src="https://github.com/Smarzhic/netology/blob/main/05-virt-05-docker-swarm/2.JPG">
-</p>
+  (![Screenshot](https://github.com/Smarzhic/netology/blob/main/05-virt-05-docker-swarm/2.JPG)
+
+## Задача 4
+Выполнить на лидере Docker Swarm кластера команду (указанную ниже) и дать письменное описание её функционала, что она делает и зачем она нужна.
+
+
