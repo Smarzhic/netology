@@ -8,4 +8,12 @@
 - Что такое Overlay Network?
 ## Задача 2
 
+<p align="center">
+  <img width="1200" height="600" src="https://github.com/Smarzhic/netology/blob/main/05-virt-05-docker-swarm/1.JPG">
+</p>
+
 ## Задача 3
+
+<p align="center">
+  <img width="1200" height="600" src="https://github.com/Smarzhic/netology/blob/main/05-virt-05-docker-swarm/2.JPG">
+</p>
