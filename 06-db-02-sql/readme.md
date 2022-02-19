@@ -254,7 +254,8 @@ Stopping psql ... done
 vagrant@server1:~/SQL$ docker ps -a
 CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS                      PORTS     NAMES
 2e7747507816   postgres:12   "docker-entrypoint.s…"   About an hour ago   Exited (0) 13 seconds ago             psql
-docker run --rm -d -e POSTGRES_USER=test-admin-user -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test_db -v vagrant_backup:/media/postgresql/backup --name psqnew postgres:12
+docker run --rm -d -e POSTGRES_USER=test-admin-user -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test_db -v /var/lib/docker/volumes/sql_backup/_d
+ata/:/media/postgresql/backup --name psqnew postgres:12
 14ce5d2623223b1f4187da85ca7f1a06a6a6e97c6eccab970d6e44ff48d5217f
 docker ps -a
 CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS                     PORTS      NAMES
