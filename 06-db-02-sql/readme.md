@@ -225,3 +225,21 @@ SELECT c.id, c.last_name, c.country, o.title FROM clients AS c INNER JOIN orders
   3 | Иоганн Себастьян Бах | Japan   | Гитара
 (3 rows)
 ```
+## Задача 5
+Получите полную информацию по выполнению запроса выдачи всех пользователей из задачи 4 (используя директиву EXPLAIN).  
+```SQL
+EXPLAIN SELECT c.id, c.last_name, c.country, o.title FROM clients AS c INNER JOIN orders AS o ON o.id = c.order_id;
+                               QUERY PLAN
+-------------------------------------------------------------------------
+ Hash Join  (cost=13.15..26.96 rows=300 width=756)
+   Hash Cond: (c.order_id = o.id)
+   ->  Seq Scan on clients c  (cost=0.00..13.00 rows=300 width=244)
+   ->  Hash  (cost=11.40..11.40 rows=140 width=520)
+         ->  Seq Scan on orders o  (cost=0.00..11.40 rows=140 width=520)
+(5 rows)
+```
+EXPLAIN - выводит план построения запроса. PostgreSQL разделил запрос на 5 итераций:
+ - время котрое пройдет прежде чем начнется вывод данных, стоимость запуска;
+ - приблизительное время которое понадобится на вывод всех данных;
+ - Ожидаемое число строк;
+ - Ожидамый средний размер строк в байтах.
