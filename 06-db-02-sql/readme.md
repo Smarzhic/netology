@@ -171,7 +171,7 @@ SELECT * FROM information_schema.table_privileges WHERE table_catalog = 'test_db
 --More--
 ```
 ## Задача 3
-Используя SQL синтаксис - наполните таблицы следующими тестовыми данными:
+Используя SQL синтаксис - наполните таблицы следующими тестовыми данными, вычислите количество записей для каждой таблицы
 ```SQL
 INSERT INTO orders VALUES (1, 'Шоколад', 10), (2, 'Принтер', 3000), (3, 'Книга', 500), (4, 'Монитор', 7000), (5, 'Гитара', 4000);
 INSERT 0 5
@@ -190,6 +190,7 @@ SELECT count(1) FROM orders;
      5
 (1 row)
 INSERT INTO clients VALUES (1, 'Иванов Иван Иванович', 'USA'), (2, 'Петров Петр Петрович', 'Canada'), (3, 'Иоганн Себастьян Бах', 'Japan'), (4, 'Ронни Джеймс Дио', 'Russia'), (5, 'Ritchie Blackmore', 'Russia');
+INSERT 0 5
 test_db=# SELECT  * FROM clients;
  id |      last_name       | country | order_id
 ----+----------------------+---------+----------
@@ -204,4 +205,23 @@ SELECT count(1) FROM clients;
 -------
      5
 (1 row)
+```
+## Задача 4
+Часть пользователей из таблицы clients решили оформить заказы из таблицы orders.
+
+Используя foreign keys свяжите записи из таблиц, согласно таблице:
+```SQL
+UPDATE clients SET order_id = 3 WHERE last_name = 'Иванов Иван Иванович';
+UPDATE 1
+UPDATE clients SET order_id = 4 WHERE last_name = 'Петров Петр Петрович';
+UPDATE 1
+UPDATE clients SET order_id = 5 WHERE last_name = 'Иоганн Себастьян Бах';
+UPDATE 1
+SELECT c.id, c.last_name, c.country, o.title FROM clients AS c INNER JOIN orders AS o ON o.id = c.order_id;
+ id |      last_name       | country |  title
+----+----------------------+---------+---------
+  1 | Иванов Иван Иванович | USA     | Книга
+  2 | Петров Петр Петрович | Canada  | Монитор
+  3 | Иоганн Себастьян Бах | Japan   | Гитара
+(3 rows)
 ```
