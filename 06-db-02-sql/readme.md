@@ -258,9 +258,9 @@ docker run --rm -d -e POSTGRES_USER=test-admin-user -e POSTGRES_PASSWORD=test -e
 ata/:/media/postgresql/backup --name psqnew postgres:12
 14ce5d2623223b1f4187da85ca7f1a06a6a6e97c6eccab970d6e44ff48d5217f
 docker ps -a
-CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS                     PORTS      NAMES
-14ce5d262322   postgres:12   "docker-entrypoint.s…"   29 seconds ago      Up 27 seconds              5432/tcp   psqnew
-2e7747507816   postgres:12   "docker-entrypoint.s…"   About an hour ago   Exited (0) 3 minutes ago              psql
+CONTAINER ID   IMAGE         COMMAND                  CREATED         STATUS          PORTS                    NAMES
+981f10875bd1   postgres:12   "docker-entrypoint.s…"   6 seconds ago   Up 5 seconds    5432/tcp                 psqnew
+2e7747507816   postgres:12   "docker-entrypoint.s…"   8 hours ago     Up 17 minutes   0.0.0.0:5432->5432/tcp   psql
 docker exec -it psqnew  bash
 ls /media/postgresql/backup/
 test_db.sql
