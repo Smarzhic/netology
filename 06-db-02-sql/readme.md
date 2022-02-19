@@ -41,39 +41,39 @@ test_db=#
 - создайте пользователя test-admin-user и БД test_db  
 ```SQL
 создано в docker-compose манифесте ранее
-test_db=# CREATE USER "test-admin-user";
+CREATE USER "test-admin-user";
 ERROR:  role "test-admin-user" already exists
-test_db=# CREATE DATABASE test_db;
+CREATE DATABASE test_db;
 ERROR:  database "test_db" already exists
 ```
 - в БД test_db создайте таблицу orders и clients (спeцификация таблиц ниже)  
 ```SQL
-test_db=# CREATE TABLE orders (id INT PRIMARY KEY, title VARCHAR(255), cost INT NOT NULL);
+CREATE TABLE orders (id INT PRIMARY KEY, title VARCHAR(255), cost INT NOT NULL);
 CREATE TABLE
-test_db=# CREATE TABLE clients (id SERIAL PRIMARY KEY, last_name VARCHAR(50), country VARCHAR(50), order_id INT REFERENCES orders(id) ON DELETE CASCADE);
+CREATE TABLE clients (id SERIAL PRIMARY KEY, last_name VARCHAR(50), country VARCHAR(50), order_id INT REFERENCES orders(id) ON DELETE CASCADE);
 CREATE TABLE
 ```
 - предоставьте привилегии на все операции пользователю test-admin-user на таблицы БД test_db  
 ```SQL
-test_db=# GRANT CONNECT ON DATABASE test_db to "test-admin-user";
+GRANT CONNECT ON DATABASE test_db to "test-admin-user";
 GRANT
-test_db=# GRANT ALL ON ALL TABLES IN SCHEMA public to "test-admin-user";
+GRANT ALL ON ALL TABLES IN SCHEMA public to "test-admin-user";
 GRANT
 ```
 - создайте пользователя test-simple-user  
 ```SQL
-test_db=# CREATE USER "test-simple-user" WITH PASSWORD 'test';
+CREATE USER "test-simple-user" WITH PASSWORD 'test';
 CREATE ROLE
 ```
 - предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE данных таблиц БД test_db  
 ```SQL
-test_db=# CREATE USER "test-simple-user" WITH PASSWORD 'test';
+CREATE USER "test-simple-user" WITH PASSWORD 'test';
 CREATE ROLE
-test_db=# GRANT CONNECT ON DATABASE test_db TO "test-simple-user";
+GRANT CONNECT ON DATABASE test_db TO "test-simple-user";
 GRANT
-test_db=# GRANT USAGE ON SCHEMA public TO "test-simple-user";
+GRANT USAGE ON SCHEMA public TO "test-simple-user";
 GRANT
-test_db=# GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to "test-simple-user";
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to "test-simple-user";
 GRANT
 ```
 Приведите:
@@ -135,7 +135,7 @@ Access method: heap
 ```
 SQL-запрос для выдачи списка пользователей с правами над таблицами test_db  
 ```SQL
-test_db=# SELECT * FROM information_schema.table_privileges WHERE table_catalog = 'test_db' AND grantee LIKE 'test-%';
+SELECT * FROM information_schema.table_privileges WHERE table_catalog = 'test_db' AND grantee LIKE 'test-%';
 ```
 список пользователей с правами над таблицами test_db
 ```SQL
@@ -175,7 +175,7 @@ test_db=# SELECT * FROM information_schema.table_privileges WHERE table_catalog 
 ```SQL
 INSERT INTO orders VALUES (1, 'Шоколад', 10), (2, 'Принтер', 3000), (3, 'Книга', 500), (4, 'Монитор', 7000), (5, 'Гитара', 4000);
 INSERT 0 5
-test_db=# SELECT * FROM orders;
+SELECT * FROM orders;
  id |  title  | cost
 ----+---------+------
   1 | Шоколад |   10
@@ -184,12 +184,12 @@ test_db=# SELECT * FROM orders;
   4 | Монитор | 7000
   5 | Гитара  | 4000
 (5 rows)
-test_db=# SELECT count(1) FROM orders;
+SELECT count(1) FROM orders;
  count
 -------
      5
 (1 row)
-test_db=# INSERT INTO clients VALUES (1, 'Иванов Иван Иванович', 'USA'), (2, 'Петров Петр Петрович', 'Canada'), (3, 'Иоганн Себастьян Бах', 'Japan'), (4, 'Ронни Джеймс Дио', 'Russia'), (5, 'Ritchie Blackmore', 'Russia');
+INSERT INTO clients VALUES (1, 'Иванов Иван Иванович', 'USA'), (2, 'Петров Петр Петрович', 'Canada'), (3, 'Иоганн Себастьян Бах', 'Japan'), (4, 'Ронни Джеймс Дио', 'Russia'), (5, 'Ritchie Blackmore', 'Russia');
 test_db=# SELECT  * FROM clients;
  id |      last_name       | country | order_id
 ----+----------------------+---------+----------
@@ -199,4 +199,9 @@ test_db=# SELECT  * FROM clients;
   4 | Ронни Джеймс Дио     | Russia  |
   5 | Ritchie Blackmore    | Russia  |
 (5 rows)
+SELECT count(1) FROM clients;
+ count
+-------
+     5
+(1 row)
 ```
