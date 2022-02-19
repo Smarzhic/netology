@@ -243,3 +243,29 @@ EXPLAIN - выводит план построения запроса. PostgreSQ
  - приблизительное время которое понадобится на вывод всех данных;
  - Ожидаемое число строк;
  - Ожидамый средний размер строк в байтах.
+ ## Задача 6
+ Создайте бэкап БД test_db и поместите его в volume, предназначенный для бэкапов (см. Задачу 1).
+ ```bash
+export PGPASSWORD=test && pg_dumpall -h localhost -U test-admin-user > /media/postgresql/backup/test_db.sql
+ls /media/postgresql/backup/
+test_db.sql
+vagrant@server1:~/SQL$ docker-compose stop
+Stopping psql ... done
+vagrant@server1:~/SQL$ docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS                      PORTS     NAMES
+2e7747507816   postgres:12   "docker-entrypoint.s…"   About an hour ago   Exited (0) 13 seconds ago             psql
+docker run --rm -d -e POSTGRES_USER=test-admin-user -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test_db -v vagrant_backup:/media/postgresql/backup --name psqnew postgres:12
+14ce5d2623223b1f4187da85ca7f1a06a6a6e97c6eccab970d6e44ff48d5217f
+docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS                     PORTS      NAMES
+14ce5d262322   postgres:12   "docker-entrypoint.s…"   29 seconds ago      Up 27 seconds              5432/tcp   psqnew
+2e7747507816   postgres:12   "docker-entrypoint.s…"   About an hour ago   Exited (0) 3 minutes ago              psql
+docker exec -it psqnew  bash
+ls /media/postgresql/backup/
+test_db.sql
+export PGPASSWORD=test && psql -h localhost -U test-admin-user -f /media/postgresql/backup/test_db.sql test_db
+psql -h localhost -U test-admin-user test_db
+psql (12.10 (Debian 12.10-1.pgdg110+1))
+Type "help" for help.
+
+test_db=#
