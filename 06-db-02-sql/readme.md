@@ -170,3 +170,33 @@ test_db=# SELECT * FROM information_schema.table_privileges WHERE table_catalog 
  test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | REFERENCES     | YES          | NO
 --More--
 ```
+## Задача 3
+Используя SQL синтаксис - наполните таблицы следующими тестовыми данными:
+```SQL
+INSERT INTO orders VALUES (1, 'Шоколад', 10), (2, 'Принтер', 3000), (3, 'Книга', 500), (4, 'Монитор', 7000), (5, 'Гитара', 4000);
+INSERT 0 5
+test_db=# SELECT * FROM orders;
+ id |  title  | cost
+----+---------+------
+  1 | Шоколад |   10
+  2 | Принтер | 3000
+  3 | Книга   |  500
+  4 | Монитор | 7000
+  5 | Гитара  | 4000
+(5 rows)
+test_db=# SELECT count(1) FROM orders;
+ count
+-------
+     5
+(1 row)
+test_db=# INSERT INTO clients VALUES (1, 'Иванов Иван Иванович', 'USA'), (2, 'Петров Петр Петрович', 'Canada'), (3, 'Иоганн Себастьян Бах', 'Japan'), (4, 'Ронни Джеймс Дио', 'Russia'), (5, 'Ritchie Blackmore', 'Russia');
+test_db=# SELECT  * FROM clients;
+ id |      last_name       | country | order_id
+----+----------------------+---------+----------
+  1 | Иванов Иван Иванович | USA     |
+  2 | Петров Петр Петрович | Canada  |
+  3 | Иоганн Себастьян Бах | Japan   |
+  4 | Ронни Джеймс Дио     | Russia  |
+  5 | Ritchie Blackmore    | Russia  |
+(5 rows)
+```
