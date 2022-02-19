@@ -104,6 +104,69 @@ pg_default |
 (4 rows)
 ```
 
-описание таблиц (describe)
-SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
+описание таблиц (describe)  
+```SQL
+test_db=# \d+ clients
+                                                         Table "public.clients"
+  Column   |         Type          | Collation | Nullable |               Default               | Storage  | Stats target | Description
+-----------+-----------------------+-----------+----------+-------------------------------------+----------+--------------+-------------
+ id        | integer               |           | not null | nextval('clients_id_seq'::regclass) | plain    |              |
+ last_name | character varying(50) |           |          |                                     | extended |              |
+ country   | character varying(50) |           |          |                                     | extended |              |
+ order_id  | integer               |           |          |                                     | plain    |              |
+Indexes:
+    "clients_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "clients_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+Access method: heap
+
+test_db=# \d+ orders
+                                          Table "public.orders"
+ Column |          Type          | Collation | Nullable | Default | Storage  | Stats target | Description
+--------+------------------------+-----------+----------+---------+----------+--------------+-------------
+ id     | integer                |           | not null |         | plain    |              |
+ title  | character varying(255) |           |          |         | extended |              |
+ cost   | integer                |           | not null |         | plain    |              |
+Indexes:
+    "orders_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "clients" CONSTRAINT "clients_order_id_fkey" FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+Access method: heap
+```
+SQL-запрос для выдачи списка пользователей с правами над таблицами test_db  
+```SQL
+test_db=# SELECT * FROM information_schema.table_privileges WHERE table_catalog = 'test_db' AND grantee LIKE 'test-%';
+```
 список пользователей с правами над таблицами test_db
+```SQL
+     grantor     |     grantee      | table_catalog |    table_schema    |              table_name               | privilege_type | is_grantable | with_hierarchy
+-----------------+------------------+---------------+--------------------+---------------------------------------+----------------+--------------+----------------
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | INSERT         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | SELECT         | YES          | YES
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | UPDATE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | DELETE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | TRUNCATE       | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | REFERENCES     | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | orders                                | TRIGGER        | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | INSERT         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | SELECT         | YES          | YES
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | UPDATE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | DELETE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | TRUNCATE       | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | REFERENCES     | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | public             | clients                               | TRIGGER        | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | INSERT         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | SELECT         | YES          | YES
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | UPDATE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | DELETE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | TRUNCATE       | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | REFERENCES     | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_statistic                          | TRIGGER        | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | INSERT         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | SELECT         | YES          | YES
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | UPDATE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | DELETE         | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | TRUNCATE       | YES          | NO
+ test-admin-user | test-admin-user  | test_db       | pg_catalog         | pg_type                               | REFERENCES     | YES          | NO
+--More--
+```
