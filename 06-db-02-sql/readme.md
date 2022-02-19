@@ -66,4 +66,44 @@ test_db=# CREATE USER "test-simple-user" WITH PASSWORD 'test';
 CREATE ROLE
 ```
 - предоставьте пользователю test-simple-user права на SELECT/INSERT/UPDATE/DELETE данных таблиц БД test_db  
-    
+```SQL
+test_db=# CREATE USER "test-simple-user" WITH PASSWORD 'test';
+CREATE ROLE
+test_db=# GRANT CONNECT ON DATABASE test_db TO "test-simple-user";
+GRANT
+test_db=# GRANT USAGE ON SCHEMA public TO "test-simple-user";
+GRANT
+test_db=# GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public to "test-simple-user";
+GRANT
+```
+Приведите:
+
+итоговый список БД после выполнения пунктов выше  
+```SQL
+test_db=#  \l+
+                                                                               List of databases
+   Name    |      Owner      | Encoding |  Collate   |   Ctype    |            Access privileges            |  Size   |
+Tablespace |                Description
+-----------+-----------------+----------+------------+------------+-----------------------------------------+---------+------------+--------------------------------------------
+ postgres  | test-admin-user | UTF8     | en_US.utf8 | en_US.utf8 |                                         | 7969 kB |
+pg_default | default administrative connection database
+ template0 | test-admin-user | UTF8     | en_US.utf8 | en_US.utf8 | =c/"test-admin-user"                   +| 7825 kB |
+pg_default | unmodifiable empty database
+           |                 |          |            |            | "test-admin-user"=CTc/"test-admin-user" |         |
+           |
+ template1 | test-admin-user | UTF8     | en_US.utf8 | en_US.utf8 | =c/"test-admin-user"                   +| 7825 kB |
+pg_default | default template for new databases
+           |                 |          |            |            | "test-admin-user"=CTc/"test-admin-user" |         |
+           |
+ test_db   | test-admin-user | UTF8     | en_US.utf8 | en_US.utf8 | =Tc/"test-admin-user"                  +| 8081 kB |
+pg_default |
+           |                 |          |            |            | "test-admin-user"=CTc/"test-admin-user"+|         |
+           |
+           |                 |          |            |            | "test-simple-user"=c/"test-admin-user"  |         |
+           |
+(4 rows)
+```
+
+описание таблиц (describe)
+SQL-запрос для выдачи списка пользователей с правами над таблицами test_db
+список пользователей с правами над таблицами test_db
