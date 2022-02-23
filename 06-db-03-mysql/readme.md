@@ -20,3 +20,13 @@ services:
       MYSQL_ROOT_PASSWORD: password
     restart: always
 ```
+
+
+```bash
+docker exec -it mysql bash
+mysql -h 127.0.0.1 -u root -p
+```
+
+```MySQl
+mysql> CREATE DATABASE test_db DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+````
