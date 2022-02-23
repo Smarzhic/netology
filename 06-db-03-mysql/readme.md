@@ -91,3 +91,17 @@ mysql> select count(*) from orders where price >300;
 +----------+
 1 row in set (0.00 sec)
 ```
+## Задача 2
+```MySQL
+mysql> CREATE USER 'test'@'localhost' IDENTIFIED BY 'test-pass';
+Query OK, 0 rows affected (0.02 sec)
+mysql> ALTER USER 'test'@'localhost' ATTRIBUTE '{"fname":"James", "lname":"Pretty"}';
+Query OK, 0 rows affected (0.00 sec)
+mysql> ALTER USER 'test'@'localhost'
+    -> IDENTIFIED BY 'test-pass'
+    -> WITH
+    -> MAX_QUERIES_PER_HOUR 100
+    -> PASSWORD EXPIRE INTERVAL 180 DAY
+    -> FAILED_LOGIN_ATTEMPTS 3 PASSWORD_LOCK_TIME 2;
+Query OK, 0 rows affected (0.01 sec)
+```
