@@ -154,7 +154,7 @@ innodb_file_format=Barracuda
 innodb_log_buffer_size	= 1M
 
 #Set Cache size
-key_buffer_size = 640М
+key_buffer_size = 296М
 
 #Set log size
 max_binlog_size	= 100M
