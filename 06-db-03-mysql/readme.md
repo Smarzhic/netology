@@ -30,3 +30,9 @@ mysql -h 127.0.0.1 -u root -p
 ```MySQl
 mysql> CREATE DATABASE test_db DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 ````
+
+```bash 
+mysql -p test_db < /var/lib/mysql/test_dump.sql
+```
+
+
