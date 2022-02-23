@@ -104,4 +104,13 @@ mysql> ALTER USER 'test'@'localhost'
     -> PASSWORD EXPIRE INTERVAL 180 DAY
     -> FAILED_LOGIN_ATTEMPTS 3 PASSWORD_LOCK_TIME 2;
 Query OK, 0 rows affected (0.01 sec)
+mysql> GRANT Select ON test_db.orders TO 'test'@'localhost';
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+mysql> SELECT * FROM INFORMATION_SCHEMA.USER_ATTRIBUTES WHERE USER='test';
++------+-----------+---------------------------------------+
+| USER | HOST      | ATTRIBUTE                             |
++------+-----------+---------------------------------------+
+| test | localhost | {"fname": "James", "lname": "Pretty"} |
++------+-----------+---------------------------------------+
+1 row in set (0.01 sec)
 ```
