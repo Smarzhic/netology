@@ -67,6 +67,7 @@ test_database=*#
 ```
 При проектировании таблицы её следовало сделать секционированной.
 ## Задача 4
+
 ```bash
 pg_dump -d test_database -U postgres -W > new_dump.sql
 ```
