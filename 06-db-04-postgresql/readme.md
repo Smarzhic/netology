@@ -65,3 +65,12 @@ test_database=*# INSERT INTO orders_2 SELECT * FROM orders where price <= 499;
 INSERT 0 5
 test_database=*#
 ```
+При проектировании таблицы её следовало сделать секционированной.
+## Задача 4
+```bash
+pg_dump -d test_database -U postgres -W > new_dump.sql
+```
+Для уникальности можно сохдать индекс
+```SQL
+CREATE INDEX ON orders ((lower(title)));
+```
