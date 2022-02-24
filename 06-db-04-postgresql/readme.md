@@ -12,7 +12,7 @@ services:
     ports:
      - 5432:5432
     volumes:
-     - /opt/data/postgresql_data:/bitnami/postgresql
+     - /opt/data/postgresql_data:/var/lib/psql
     environment:
      - POSTGRESQL_PASSWORD=password
     restart: always
@@ -27,3 +27,11 @@ psql -h localhost -p 5432 -U postgres -W
 - `\d` <table_name> вывода описания содержимого таблиц
 - `\q` выхода из psql
 ## Задача 2
+```SQL
+postgres=# CREATE DATABASE test_database;
+CREATE DATABASE
+```
+
+``bash
+psql -U postgres -f ./pg_backup.sql test_database
+```
