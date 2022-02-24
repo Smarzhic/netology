@@ -50,3 +50,18 @@ test_database=# SELECT attname, avg_width FROM pg_stats WHERE tablename = 'order
  title   |        16
 (1 row)
 ```
+## Задача 3
+Шадрирование уже существующей таблицы
+```SQL
+test_database=# BEGIN TRANSACTION;
+BEGIN
+test_database=*# CREATE TABLE orders_1 (CONSTRAINT price_1 CHECK (price > 499)) INHERITS (orders);
+CREATE TABLE
+test_database=*# CREATE TABLE orders_2 (CONSTRAINT price_2 CHECK (price <= 499)) INHERITS (orders);
+CREATE TABLE
+test_database=*# INSERT INTO orders_1 SELECT * FROM orders where price > 499;
+INSERT 0 3
+test_database=*# INSERT INTO orders_2 SELECT * FROM orders where price <= 499;
+INSERT 0 5
+test_database=*#
+```
