@@ -70,7 +70,7 @@ test_database=*#
 ```bash
 pg_dump -d test_database -U postgres -W > new_dump.sql
 ```
-Для уникальности можно сохдать индекс
+Для уникальности можно создать индекс
 ```SQL
 CREATE INDEX ON orders ((lower(title)));
 ```
