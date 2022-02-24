@@ -32,6 +32,6 @@ postgres=# CREATE DATABASE test_database;
 CREATE DATABASE
 ```
 
-``bash
+```bash
 psql -U postgres -f ./pg_backup.sql test_database
 ```
