@@ -75,3 +75,7 @@ pg_dump -d test_database -U postgres -W > new_dump.sql
 ```SQL
 CREATE INDEX ON orders ((lower(title)));
 ```
+Либо можно использовать уникальные ограничения UNIQUE 
+```
+ALTER TABLE ONLY public.orders ADD UNIQUE (price, title);
+```
