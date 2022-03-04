@@ -67,3 +67,6 @@ path:
   repo:
     - /opt/backups
 ```
+```bash
+docker run --name elasticsearch_netology -d -p 9200:9200 -p 9300:9300 smarzhic/elastik:latest
+```
