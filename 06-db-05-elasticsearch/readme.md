@@ -1,5 +1,10 @@
 # Задание 1
-```
+
+Ссылка на образ - https://hub.docker.com/r/smarzhic/elastik
+
+DockerFile для создание образа
+
+```DockerFile
 FROM centos:7
 
 RUN yum install wget -y
@@ -40,4 +45,25 @@ EXPOSE 9200
 EXPOSE 9300
 
 ENTRYPOINT ["./bin/elasticsearch"]
+```
+elasticsearch.yml
+```Yml
+---
+discovery:
+  type: single-node
+
+cluster:
+  name: netology
+
+node:
+  name: netology_test
+
+network:
+  host: 0.0.0.0
+
+path:
+  data: /var/lib/elasticsearch
+  logs: /var/log/elasticsearch
+  repo:
+    - /opt/backups
 ```
