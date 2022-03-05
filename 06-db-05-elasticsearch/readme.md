@@ -102,3 +102,4 @@ green  open ind-1 VsLzJh4XSeadYv3O8oFtxg 1 0 0 0 208b 208b
 yellow open ind-3 70WybNmCTlGFrL7juP3WAA 4 2 0 0 832b 832b
 yellow open ind-2 3LmD2hQMR-SkubOnV_I-XA 2 1 0 0 416b 416b
 ```
+Два индекса находится в состоянии yellow. Это вызвано неверным расчетом кол-во шардов и реплик. Для стабильной работы нам надо было выставлять number_of_shards = 3 и number_of_replicas = 0, а в эти рамки попадает только индекс ind-1.
