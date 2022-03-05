@@ -87,7 +87,11 @@ smarzhic@docker:~/ELK$ curl localhost:9200/
   },
   "tagline" : "You Know, for Search"
 }
-
-smarzhic@docker:~/ELK$ docker exec -it e739274f3245 bash
-[elasticsearch@e739274f3245 elasticsearch-7.13.4]$
+```
+# Задание 2
+Добавляем индексы
+```bash
+curl -X PUT localhost:9200/ind-1 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 1,  "number_of_replicas": 0 }}'
+curl -X PUT localhost:9200/ind-2 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 2,  "number_of_replicas": 1 }}'
+curl -X PUT localhost:9200/ind-3 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 4,  "number_of_replicas": 2 }}' 
 ```
