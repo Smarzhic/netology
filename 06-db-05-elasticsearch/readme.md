@@ -126,3 +126,18 @@ smarzhic@docker:~/ELK$ curl -XGET localhost:9200/_cluster/health/?pretty=true
   "active_shards_percent_as_number" : 41.17647058823529
 }
 ```
+Удаление индексов
+```bash
+smarzhic@docker:~/ELK$ curl -X DELETE 'http://localhost:9200/ind-1?pretty'
+{
+  "acknowledged" : true
+}
+smarzhic@docker:~/ELK$  curl -X DELETE 'http://localhost:9200/ind-2?pretty'
+{
+  "acknowledged" : true
+}
+smarzhic@docker:~/ELK$ curl -X DELETE 'http://localhost:9200/ind-3?pretty'
+{
+  "acknowledged" : true
+}
+```
