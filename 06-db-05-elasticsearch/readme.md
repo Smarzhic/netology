@@ -193,3 +193,16 @@ smarzhic@docker:~/ELK$ curl -X PUT "localhost:9200/_snapshot/netology_backup/net
 }
 
 ```
+```bash
+[elasticsearch@e739274f3245 backups]$ pwd
+/opt/backups
+[elasticsearch@e739274f3245 backups]$ ls -la
+total 56
+drwxr-xr-x 1 elasticsearch elasticsearch  4096 Mar  5 14:04 .
+drwxr-xr-x 1 root          root           4096 Mar  4 14:01 ..
+-rw-r--r-- 1 elasticsearch elasticsearch   514 Mar  5 14:04 index-0
+-rw-r--r-- 1 elasticsearch elasticsearch     8 Mar  5 14:04 index.latest
+drwxr-xr-x 3 elasticsearch elasticsearch  4096 Mar  5 14:04 indices
+-rw-r--r-- 1 elasticsearch elasticsearch 25613 Mar  5 14:04 meta-EIN-_SuYTEGw9iGloJ6xkQ.dat
+-rw-r--r-- 1 elasticsearch elasticsearch   369 Mar  5 14:04 snap-EIN-_SuYTEGw9iGloJ6xkQ.dat
+```
