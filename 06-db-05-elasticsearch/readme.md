@@ -69,4 +69,25 @@ path:
 ```
 ```bash
 docker run --name elasticsearch_netology -d -p 9200:9200 -p 9300:9300 smarzhic/elastik:latest
+smarzhic@docker:~/ELK$ curl localhost:9200/
+{
+  "name" : "netology_test",
+  "cluster_name" : "netology",
+  "cluster_uuid" : "pjehlvH5S5K1l1UlDP17JA",
+  "version" : {
+    "number" : "7.13.4",
+    "build_flavor" : "default",
+    "build_type" : "tar",
+    "build_hash" : "c5f60e894ca0c61cdbae4f5a686d9f08bcefc942",
+    "build_date" : "2021-07-14T18:33:36.673943207Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.8.2",
+    "minimum_wire_compatibility_version" : "6.8.0",
+    "minimum_index_compatibility_version" : "6.0.0-beta1"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+smarzhic@docker:~/ELK$ docker exec -it e739274f3245 bash
+[elasticsearch@e739274f3245 elasticsearch-7.13.4]$
 ```
