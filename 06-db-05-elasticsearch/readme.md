@@ -1,4 +1,5 @@
-# Задание 1
+# Домашнее задание к занятию "6.5. Elasticsearch"
+## Задание 1
 
 Ссылка на образ - https://hub.docker.com/r/smarzhic/elastik
 
@@ -88,7 +89,7 @@ smarzhic@docker:~/ELK$ curl localhost:9200/
   "tagline" : "You Know, for Search"
 }
 ```
-# Задание 2
+## Задание 2
 Добавляем индексы
 ```bash
 curl -X PUT localhost:9200/ind-1 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 1,  "number_of_replicas": 0 }}'
@@ -139,5 +140,22 @@ smarzhic@docker:~/ELK$  curl -X DELETE 'http://localhost:9200/ind-2?pretty'
 smarzhic@docker:~/ELK$ curl -X DELETE 'http://localhost:9200/ind-3?pretty'
 {
   "acknowledged" : true
+}
+```
+## Задание 3
+
+```bash
+smarzhic@docker:~/ELK$ curl -X PUT "localhost:9200/_snapshot/netology_backup?pretty" -H 'Content-Type: application/json' -d' { "type": "fs",   "settings": { "location": "/opt/backups" } }'
+{
+  "acknowledged" : true
+}
+smarzhic@docker:~/ELK$ curl -X GET "localhost:9200/_snapshot/netology_backup?pretty"
+{
+  "netology_backup" : {
+    "type" : "fs",
+    "settings" : {
+      "location" : "/opt/backups"
+    }
+  }
 }
 ```
