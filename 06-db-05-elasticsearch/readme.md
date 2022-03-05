@@ -95,3 +95,10 @@ curl -X PUT localhost:9200/ind-1 -H 'Content-Type: application/json' -d'{ "setti
 curl -X PUT localhost:9200/ind-2 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 2,  "number_of_replicas": 1 }}'
 curl -X PUT localhost:9200/ind-3 -H 'Content-Type: application/json' -d'{ "settings": { "number_of_shards": 4,  "number_of_replicas": 2 }}' 
 ```
+Запрос индексов
+```bash
+smarzhic@docker:~/ELK$ curl -X GET "localhost:9200/_cat/indices"
+green  open ind-1 VsLzJh4XSeadYv3O8oFtxg 1 0 0 0 208b 208b
+yellow open ind-3 70WybNmCTlGFrL7juP3WAA 4 2 0 0 832b 832b
+yellow open ind-2 3LmD2hQMR-SkubOnV_I-XA 2 1 0 0 416b 416b
+```
