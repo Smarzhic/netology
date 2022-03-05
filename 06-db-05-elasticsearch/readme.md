@@ -158,4 +158,38 @@ smarzhic@docker:~/ELK$ curl -X GET "localhost:9200/_snapshot/netology_backup?pre
     }
   }
 }
+smarzhic@docker:~/ELK$ curl -X PUT "localhost:9200/test?pretty" -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 } } }'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "test"
+}
+smarzhic@docker:~/ELK$ curl -X PUT "localhost:9200/_snapshot/netology_backup/netology_snapshot_1?wait_for_completion=true&pretty"
+{
+  "snapshot" : {
+    "snapshot" : "netology_snapshot_1",
+    "uuid" : "EIN-_SuYTEGw9iGloJ6xkQ",
+    "version_id" : 7130499,
+    "version" : "7.13.4",
+    "indices" : [
+      "test"
+    ],
+    "data_streams" : [ ],
+    "include_global_state" : true,
+    "state" : "SUCCESS",
+    "start_time" : "2022-03-05T14:04:04.159Z",
+    "start_time_in_millis" : 1646489044159,
+    "end_time" : "2022-03-05T14:04:04.159Z",
+    "end_time_in_millis" : 1646489044159,
+    "duration_in_millis" : 0,
+    "failures" : [ ],
+    "shards" : {
+      "total" : 1,
+      "failed" : 0,
+      "successful" : 1
+    },
+    "feature_states" : [ ]
+  }
+}
+
 ```
