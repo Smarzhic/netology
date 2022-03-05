@@ -103,3 +103,26 @@ yellow open ind-3 70WybNmCTlGFrL7juP3WAA 4 2 0 0 832b 832b
 yellow open ind-2 3LmD2hQMR-SkubOnV_I-XA 2 1 0 0 416b 416b
 ```
 Два индекса находится в состоянии yellow. Это вызвано неверным расчетом кол-во шардов и реплик. Для стабильной работы нам надо было выставлять number_of_shards = 3 и number_of_replicas = 0, а в эти рамки попадает только индекс ind-1.
+
+
+Состояние кластера
+```bash
+smarzhic@docker:~/ELK$ curl -XGET localhost:9200/_cluster/health/?pretty=true
+{
+  "cluster_name" : "netology",
+  "status" : "yellow",
+  "timed_out" : false,
+  "number_of_nodes" : 1,
+  "number_of_data_nodes" : 1,
+  "active_primary_shards" : 7,
+  "active_shards" : 7,
+  "relocating_shards" : 0,
+  "initializing_shards" : 0,
+  "unassigned_shards" : 10,
+  "delayed_unassigned_shards" : 0,
+  "number_of_pending_tasks" : 0,
+  "number_of_in_flight_fetch" : 0,
+  "task_max_waiting_in_queue_millis" : 0,
+  "active_shards_percent_as_number" : 41.17647058823529
+}
+```
