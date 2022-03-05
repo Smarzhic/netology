@@ -206,3 +206,11 @@ drwxr-xr-x 3 elasticsearch elasticsearch  4096 Mar  5 14:04 indices
 -rw-r--r-- 1 elasticsearch elasticsearch 25613 Mar  5 14:04 meta-EIN-_SuYTEGw9iGloJ6xkQ.dat
 -rw-r--r-- 1 elasticsearch elasticsearch   369 Mar  5 14:04 snap-EIN-_SuYTEGw9iGloJ6xkQ.dat
 ```
+```bash
+root@docker# curl -X DELETE "localhost:9200/test?pretty"
+root@docker# curl -X PUT "localhost:9200/test-2?pretty" -H 'Content-Type: application/json' -d'{ "settings": { "index": { "number_of_shards": 1, "number_of_replicas": 0 } } }'
+{
+  "acknowledged" : true,
+  "shards_acknowledged" : true,
+  "index" : "test-2"
+}
