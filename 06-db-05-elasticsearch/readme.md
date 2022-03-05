@@ -214,3 +214,15 @@ root@docker# curl -X PUT "localhost:9200/test-2?pretty" -H 'Content-Type: applic
   "shards_acknowledged" : true,
   "index" : "test-2"
 }
+root@docker:/opt/containerd# curl -X GET "localhost:9200/_cat/indices"
+green open test-2 N99W0Hx3RviAbgPOq_ptXw 1 0 0 0 208b 208b
+```
+```bash
+root@docker:/opt/containerd# curl -X POST "localhost:9200/_snapshot/netology_backup/netology_snapshot_1/_restore?pretty"
+{
+  "accepted" : true
+}
+root@docker:/opt/containerd# curl -X GET "localhost:9200/_cat/indices"
+green open test-2 N99W0Hx3RviAbgPOq_ptXw 1 0 0 0 208b 208b
+green open test   6kmVwErESzmul67VaoH5FA 1 0 0 0 208b 208b
+```
