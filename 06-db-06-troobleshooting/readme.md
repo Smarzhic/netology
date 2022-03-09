@@ -3,7 +3,7 @@
 Опеределить текущую операцию можно при помощи `db.currentOp()`
 ```SQL
 db.currentOp().inprog.forEach(function (op) {
-  if (op.secs_running > 180) printjson(op);
+  if (op.secs_running > 100) printjson(op);
 });
 ```
 Завершить запрос можно с помощью ключа `db.killOp()`
