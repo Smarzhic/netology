@@ -27,8 +27,9 @@ db.killOp(op.opid);
   - Добавление ресурсов хосту
   ## Задание 4 `PostgreSQL`
   Проблема вызвана исчерпанием оперативной памяти на сервере с `PostgreSQL`
-  Необзходимо выставить лимит на использование ОЗУ. Для расчета лимита можно воспользоваться формулой `shared_buffers + (temp_buffers + work_mem) * max_connections)`. При этом добавить на сервер памяти примерно на 30% больше расчитанного.
-  
+Необзходимо выставить лимит на использование ОЗУ. Для расчета лимита можно воспользоваться формулой `shared_buffers + (temp_buffers + work_mem) * max_connections)`. При этом добавить на сервер памяти примерно на 30% больше расчитанного. 
+
+Произвести настройку/проверку таких параметров как `shared_buffers` `huge_pages` `temp_buffers` `max_prepared_transactions` `work_mem` `maintenance_work_mem` `autovacuum_work_mem` `max_stack_depth` `shashared_memory_type` `dynamic_shared_memory_type`
   
 Тюнинг сервера `PostgreSQL`
 ```bash
