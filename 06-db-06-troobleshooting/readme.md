@@ -28,3 +28,9 @@ db.killOp(op.opid);
   ## Задание 4 `PostgreSQL`
   Проблема вызвана исчерпанием оперативной памяти на сервере с `PostgreSQL`
   Необзходимо выставить лимит на использование ОЗУ. Для расчета лимита можно воспользоваться формулой `shared_buffers + (temp_buffers + work_mem) * max_connections)`. При этом добавить на сервер памяти примерно на 30% больше расчитанного.
+```bash
+sysctl -w vm.overcommit_memory=2
+echo -1000 > /proc/self/oom_score_adj
+export PG_OOM_ADJUST_FILE=/proc/self/oom_score_adj
+export PG_OOM_ADJUST_VALUE=0
+```
