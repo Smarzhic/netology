@@ -4,3 +4,5 @@
 ```bash
 sudo apt update && apt install openjdk-8-jre
 ```
+Установлен плагин Docker
+Настроен cloud для использования локального Docker
