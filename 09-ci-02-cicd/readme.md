@@ -58,4 +58,17 @@ OS name: "linux", version: "5.13.0-25-generic", arch: "amd64", family: "unix"
 
 Скачиваем пакет sonar-scanner, который нам предлагает скачать сам sonarqube  
 Делаем так, чтобы binary был доступен через вызов в shell (или меняем переменную PATH или любой другой удобный вам способ)
-
+```bash
+netology@netology:~/Projects$ export PATH=$PATH:/home/netology/progs/sonar-scanner-4.6.2.2472-linux/bin
+netology@netology:~/Projects$ echo $PATH
+/home/netology/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/netology/.local/bin:/home/netology/progs/sonar-scanner-4.6.2.2472-linux/bin
+```
+Проверяем sonar-scanner --version
+```bash
+netology@netology:~/Projects$ sonar-scanner --version
+INFO: Scanner configuration file: /home/netology/progs/sonar-scanner-4.6.2.2472-linux/conf/sonar-scanner.properties
+INFO: Project root configuration file: NONE
+INFO: SonarScanner 4.6.2.2472
+INFO: Java 11.0.11 AdoptOpenJDK (64-bit)
+INFO: Linux 5.13.0-25-generic amd64
+```
