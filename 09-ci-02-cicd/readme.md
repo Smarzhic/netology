@@ -52,5 +52,10 @@ Java version: 11.0.13, vendor: Ubuntu, runtime: /usr/lib/jvm/java-11-openjdk-amd
 Default locale: ru_RU, platform encoding: UTF-8
 OS name: "linux", version: "5.13.0-25-generic", arch: "amd64", family: "unix"
 ```
-2. [maven-metadata](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/maven-metadata.xml)
-3. [pom](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/pom.xml)
+## Знакомоство с SonarQube
+Создаём новый проект, название произвольное
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/6.png)
+
+Скачиваем пакет sonar-scanner, который нам предлагает скачать сам sonarqube  
+Делаем так, чтобы binary был доступен через вызов в shell (или меняем переменную PATH или любой другой удобный вам способ)
+
