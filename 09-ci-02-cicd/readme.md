@@ -167,3 +167,34 @@ metadata
     </versioning>
 </metadata>
 ```
+## Знакомоство с Maven
+Меняем в pom.xml блок с зависимостями под наш артефакт из первого пункта задания для Nexus (java с версией 8_202)
+
+pom.xml
+
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+ 
+  <groupId>com.netology.app</groupId>
+  <artifactId>simple-app</artifactId>
+  <version>1.0-SNAPSHOT</version>
+   <repositories>
+    <repository>
+      <id>my-repo</id>
+      <name>maven-public</name>
+      <url>http://62.84.121.111:8081/repository/maven-public/</url>
+    </repository>
+  </repositories>
+  <dependencies>
+    <dependency>
+      <groupId>netology</groupId>
+      <artifactId>java</artifactId>
+      <version>8_202</version>
+      <classifier>distrib</classifier>
+      <type>tar.gz</type>
+    </dependency>
+  </dependencies>
+</project>
+```
