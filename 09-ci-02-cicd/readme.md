@@ -72,3 +72,23 @@ INFO: SonarScanner 4.6.2.2472
 INFO: Java 11.0.11 AdoptOpenJDK (64-bit)
 INFO: Linux 5.13.0-25-generic amd64
 ```
+Запускаем `sonar-scanner`
+```bash
+sonar-scanner \
+>   -Dsonar.projectKey=NC-power \
+>   -Dsonar.sources=. \
+>   -Dsonar.host.url=http://51.250.22.212:9000 \
+>   -Dsonar.login=5562f9278f9a797a74ed5b5577314a05a4332cc7
+```
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/7.png)
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/8.png)
+
+Запускаем анализатор против кода из директории example с дополнительным ключом -Dsonar.coverage.exclusions=fail.py
+```bash
+sonar-scanner \
+>   -Dsonar.projectKey=NC-power \
+>   -Dsonar.sources=. \
+>   -Dsonar.host.url=http://51.250.22.212:9000 \
+>   -Dsonar.login=5562f9278f9a797a74ed5b5577314a05a4332cc7 \
+>   -Dsonar.coverage.exclusions=fail.py
+```
