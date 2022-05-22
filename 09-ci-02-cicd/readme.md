@@ -198,3 +198,33 @@ pom.xml
   </dependencies>
 </project>
 ```
+Запускаем команду mvn package в директории с pom.xml, ожидаем успешного окончания
+
+Проверяем директорию ~/.m2/repository/, находим наш артефакт
+
+```bash
+netology@netology:~/Projects/ci_cd/current_exercises/9.3ex/mvn$ ls -l ~/.m2/repository/
+итого 40
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 backport-util-concurrent
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 classworlds
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 com
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 commons-cli
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 commons-lang
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 commons-logging
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 junit
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 log4j
+drwxrwxr-x 3 netology netology 4096 янв 19 23:59 netology
+drwxrwxr-x 6 netology netology 4096 янв 19 23:59 org
+
+netology@netology:~/Projects/ci_cd/current_exercises/9.3ex/mvn$ cd ~/.m2/repository/netology/
+netology@netology:~/.m2/repository/netology$ tree
+.
+└── java
+    └── 8_202
+        ├── java-8_202-distrib.tar.gz
+        ├── java-8_202-distrib.tar.gz.sha1
+        ├── java-8_202.pom.lastUpdated
+        └── _remote.repositories
+
+2 directories, 4 files
+```
