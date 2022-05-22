@@ -92,3 +92,8 @@ sonar-scanner \
 >   -Dsonar.login=5562f9278f9a797a74ed5b5577314a05a4332cc7 \
 >   -Dsonar.coverage.exclusions=fail.py
 ```
+Проверяем резудтат после исклоючения файла
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/9.png)
+
+Баги остались
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/10.png)
