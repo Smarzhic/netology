@@ -126,3 +126,6 @@ sonar-scanner \
    -Dsonar.coverage.exclusions=fail.py \
    -Dsonar.python.version=2
 ```
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/11.png)
+Запускаем анализатор повторно
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/12.png)
