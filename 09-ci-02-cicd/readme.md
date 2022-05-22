@@ -150,6 +150,7 @@ sonar-scanner \
 
 Проверяем, что все файлы загрузились успешно
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/18.png)
+
 metadata
 ```xml
 <metadata modelVersion="1.1.0">
