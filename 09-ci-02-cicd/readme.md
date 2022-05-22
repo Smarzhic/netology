@@ -129,3 +129,17 @@ sonar-scanner \
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/11.png)
 Запускаем анализатор повторно
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/12.png)
+
+##Знакомоство с Nexus
+В репозиторий maven-public загружаем артефакт с GAV параметрами:
+
+```bash
+    * groupId: netology
+    * artifactId: java
+    * version: 8_202
+    * classifier: distrib
+    * type: tar.gz
+```
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/13.png)
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/14.png)
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/15.png)
