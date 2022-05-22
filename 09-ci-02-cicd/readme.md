@@ -97,3 +97,32 @@ sonar-scanner \
 
 Баги остались
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/10.png)
+
+Исправляем ошибки, которые он выявил(включая warnings)
+```bash
+def increment(index):
+    local_index = 0
+    local_index += 1
+    local_index += index
+    return local_index
+def get_square(numb):
+    return numb*numb
+def print_numb(numb):
+    print("Number is {}".format(numb))
+
+index = 0
+while (index < 10):
+    index = increment(index)
+    print(get_square(index))
+```
+Запуск осуществляла с `-Dsonar.python.version=2` чтобы ушло предупреждение об отсутствии версии `python`
+```bash
+netology@netology:~/Projects/ci_cd/current_exercises/9.3ex/example$ 
+sonar-scanner \
+   -Dsonar.projectKey=NC-power \
+   -Dsonar.sources=. \
+   -Dsonar.host.url=http://51.250.22.212:9000 \
+   -Dsonar.login=5562f9278f9a797a74ed5b5577314a05a4332cc7 \
+   -Dsonar.coverage.exclusions=fail.py \
+   -Dsonar.python.version=2
+```
