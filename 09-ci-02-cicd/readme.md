@@ -143,3 +143,26 @@ sonar-scanner \
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/13.png)
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/14.png)
 >![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/15.png)
+ 
+В него же загружаем такой же артефакт, но с version: 8_102
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/16.png)
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/17.png)
+
+Проверяем, что все файлы загрузились успешно
+>![PID 2](https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/18.png)
+metadata
+```xml
+<metadata modelVersion="1.1.0">
+    <groupId>netology</groupId>
+    <artifactId>java</artifactId>
+    <versioning>
+        <latest>8_202</latest>
+        <release>8_202</release>
+        <versions>
+            <version>8_102</version>
+            <version>8_202</version>
+        </versions>
+        <lastUpdated>20220119203554</lastUpdated>
+    </versioning>
+</metadata>
+```
