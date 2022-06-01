@@ -1,4 +1,33 @@
 # Домашнее задание к занятию "7.3. Основы и принцип работы Терраформ"
 ## Задача 1. Создадим бэкэнд в S3
-Bucket:
->![PID 1]([https://github.com/Smarzhic/netology/blob/main/09-ci-02-cicd/img/1.png](https://github.com/Smarzhic/netology/blob/main/07-terraform-03-basic/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA.JPG))
+Bucket:  
+(![Screenshot](https://github.com/Smarzhic/netology/blob/main/07-terraform-03-basic/1.JPG) 
+
+Permissions:
+
+```terraform
+{
+   "Version": "2012-10-17",
+   "Statement": [
+       {
+           "Effect": "Allow",
+           "Principal": {
+               "AWS": "*"
+           },
+           "Action": "s3:ListBucket",
+           "Resource": "arn:aws:s3:::lerbucket"
+       },
+       {
+           "Effect": "Allow",
+           "Principal": {
+               "AWS": "*"
+           },
+           "Action": [
+               "s3:GetObject",
+               "s3:PutObject"
+           ],
+           "Resource": "arn:aws:s3:::lerbucket/*"
+       }
+   ]
+}
+```
