@@ -342,4 +342,230 @@ $ terraform workspace list
 4. Добавим count. Для stage должен создаться один экземпляр ec2, а для prod два.
 5. Создайте рядом еще один aws_instance, но теперь определите их количество при помощи for_each, а не count.  
 6. Чтобы при изменении типа инстанса не возникло ситуации, когда не будет ни одного инстанса добавьте параметр жизненного цикла create_before_destroy = true в один из рессурсов aws_instance.  
+
 Объявим переменные:
+`variables.tf`
+```bash
+variable "aws-region" {
+  default = "eu-central-1"
+  description = "Default Amazon region"
+}
+
+variable "web_instance_type_map" {
+  type = map
+  default = {
+    "stage" = "t3.micro"
+    "prod" = "t3.large"
+  }
+
+} 
+
+variable "web_instance_count_map" {
+  type = map
+  default = {
+    "stage" = 1
+    "prod" = 2
+  }
+} 
+
+
+variable "web_instance_map" {
+ type = map(object({
+   name = string
+   count  = number
+ }))
+ description = "Instance Type"
+}
+```
+Проинициализируем `Map'y`
+`terraform.tfvars`
+```bash
+  web_instance_map = {
+    "stage" = {
+      name = "t3.micro"
+      count = 1
+    },
+    
+    "prod" = {
+      name = "t3.large"
+      count = 2
+    }
+  }
+```
+Использование переменных
+`main.tf`
+```bash
+# Configure the AWS Provider
+
+provider "aws" {
+  region  = "eu-central-1"
+  allowed_account_ids = ["---"]
+  shared_credentials_file = "$HOME/.aes/credentials"
+  profile = "******"
+}
+
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+
+}
+
+locals {
+    environment = terraform.workspace
+}
+
+
+resource "aws_instance" "test" {
+  ami          		 = data.aws_ami.ubuntu.id
+  instance_type 	 = lookup(var.web_instance_type_map, local.environment)
+  count            = lookup(var.web_instance_count_map, local.environment)
+
+  tags = {
+    Name = "test"
+  }
+}
+
+resource "aws_instance" "test2" {
+  for_each = var.web_instance_map
+  ami = data.aws_ami.ubuntu.id
+  instance_type = each.value.name
+
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = {
+    Name = "test2 ${each.value.name}"
+  }
+}
+```
+`terraform plan` для prod
+```terraform
+$ terraform plan
+Acquiring state lock. This may take a few moments...
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+ # aws_instance.test2["prod"] will be created
+  + resource "aws_instance" "test2" {
+      + ami                                  = "ami-0a49b025fffbbdac6"
+      + arn                                  = (known after apply)
+      + associate_public_ip_address          = (known after apply)
+      + availability_zone                    = (known after apply)
+      + cpu_core_count                       = (known after apply)
+      + cpu_threads_per_core                 = (known after apply)
+      + disable_api_termination              = (known after apply)
+      + ebs_optimized                        = (known after apply)
+      + get_password_data                    = false
+      + host_id                              = (known after apply)
+      + id                                   = (known after apply)
+      + instance_initiated_shutdown_behavior = (known after apply)
+      + instance_state                       = (known after apply)
+      + instance_type                        = "t3.large"
+      + ipv6_address_count                   = (known after apply)
+      + ipv6_addresses                       = (known after apply)
+      + key_name                             = (known after apply)
+      + monitoring                           = (known after apply)
+      + outpost_arn                          = (known after apply)
+      + password_data                        = (known after apply)
+      + placement_group                      = (known after apply)
+      + placement_partition_number           = (known after apply)
+      + primary_network_interface_id         = (known after apply)
+      + private_dns                          = (known after apply)
+      + private_ip                           = (known after apply)
+      + public_dns                           = (known after apply)
+      + public_ip                            = (known after apply)
+      + secondary_private_ips                = (known after apply)
+      + security_groups                      = (known after apply)
+      + source_dest_check                    = true
+      + subnet_id                            = (known after apply)
+      + tags                                 = {
+          + "Name" = "test2 t3.large"
+        }
+      + tags_all                             = {
+          + "Name" = "test2 t3.large"
+        }
+      + tenancy                              = (known after apply)
+      + user_data                            = (known after apply)
+      + user_data_base64                     = (known after apply)
+      + vpc_security_group_ids               = (known after apply)
+
+      + capacity_reservation_specification {
+          + capacity_reservation_preference = (known after apply)
+
+          + capacity_reservation_target {
+              + capacity_reservation_id = (known after apply)
+            }
+        }
+
+      + ebs_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + snapshot_id           = (known after apply)
+          + tags                  = (known after apply)
+          + throughput            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+
+      + enclave_options {
+          + enabled = (known after apply)
+        }
+
+      + ephemeral_block_device {
+          + device_name  = (known after apply)
+          + no_device    = (known after apply)
+          + virtual_name = (known after apply)
+        }
+
+      + metadata_options {
+          + http_endpoint               = (known after apply)
+          + http_put_response_hop_limit = (known after apply)
+          + http_tokens                 = (known after apply)
+        }
+
+      + network_interface {
+          + delete_on_termination = (known after apply)
+          + device_index          = (known after apply)
+          + network_interface_id  = (known after apply)
+        }
+
+      + root_block_device {
+          + delete_on_termination = (known after apply)
+          + device_name           = (known after apply)
+          + encrypted             = (known after apply)
+          + iops                  = (known after apply)
+          + kms_key_id            = (known after apply)
+          + tags                  = (known after apply)
+          + throughput            = (known after apply)
+          + volume_id             = (known after apply)
+          + volume_size           = (known after apply)
+          + volume_type           = (known after apply)
+        }
+    }
+Plan: 4 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + account_id  = "---"
+  + caller_arn  = "arn:aws:iam::---:root"
+  + caller_user = "---"
+  ```
