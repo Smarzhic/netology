@@ -571,3 +571,4 @@ Changes to Outputs:
   ```
 ![Screenshot](https://github.com/Smarzhic/netology/blob/main/07-terraform-03-basic/2.JPG) 
 ![Screenshot](https://github.com/Smarzhic/netology/blob/main/07-terraform-03-basic/3.JPG) 
+
