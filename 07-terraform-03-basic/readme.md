@@ -1,7 +1,7 @@
 # Домашнее задание к занятию "7.3. Основы и принцип работы Терраформ"
 ## Задача 1. Создадим бэкэнд в S3
 Bucket:  
-(![Screenshot](https://github.com/Smarzhic/netology/blob/main/07-terraform-03-basic/1.JPG) 
+![Screenshot](https://github.com/Smarzhic/netology/blob/main/07-terraform-03-basic/1.JPG) 
 
 `Permissions:`
 
