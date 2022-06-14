@@ -20,9 +20,9 @@ go version go1.16.2 linux/amd64
             fmt.Print("Enter value in foot: ")
             var input float64
             
-            fmt.Scanf("%f", &input)           // округлим до 2х знаков в строке
-            output := input * float64(0.3048) // точное значение 
-            rOutput := math.Round(output)     // округлим до целого
+            fmt.Scanf("%f", &input)
+            output := input * float64(0.3048)
+            rOutput := math.Round(output)
             sOutput := fmt.Sprintf("( %.2f)", output)
             fmt.Println("Value in Meters:", rOutput, sOutput )
 ```
